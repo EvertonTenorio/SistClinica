@@ -7,6 +7,7 @@ package br.com.clinica.controladores;
 
 import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
+import br.com.clinica.repositorio.implementacoes.RepositorioLoginImplDB;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,6 +27,7 @@ public class ControladorLogin {
     private Paciente pacLogado = null;
     private ControladorFuncionario controleFuncionario = null;
     private ControladorPaciente controlePaciente = null;
+    private RepositorioLoginImplDB repositorioLogin;
 
     public ControladorLogin() {
         HttpSession session = ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
@@ -33,7 +35,7 @@ public class ControladorLogin {
 
         controleFuncionario = (ControladorFuncionario) session.getAttribute("controleFuncionario");
         controlePaciente = (ControladorPaciente) session.getAttribute("controlePaciente");
-
+        
         if (controleFuncionario == null) {
             controleFuncionario = new ControladorFuncionario();
             session.setAttribute("controleFuncionario", controleFuncionario);
@@ -43,6 +45,7 @@ public class ControladorLogin {
             controlePaciente = new ControladorPaciente();
             session.setAttribute("controlePaciente", controlePaciente);
         }
+        repositorioLogin = new RepositorioLoginImplDB();
     }
 
     public String realizarLogin(String login, String senha) {
@@ -64,28 +67,18 @@ public class ControladorLogin {
     }
     
     public void logarFuncionario(String login, String senha){
-        ArrayList<Funcionario> funcionarios = (ArrayList<Funcionario>) controleFuncionario.getFuncionarios();
-        Funcionario f;
-
-        for (int i = 0; i < funcionarios.size(); i++) {
-            f = funcionarios.get(i);
-            if (f.getUsuario().getEmail().equals(login) && f.getUsuario().getSenha().equals(senha)) {
-                funcLogado = f;
-                break;
-            }
+        Funcionario f = null;
+        f = repositorioLogin.buscarUsuarioFuncionario(login, senha);
+        if(f != null){
+            funcLogado = f;
         }
     }
     
     public void logarPaciente(String login, String senha){
-        ArrayList<Paciente> pacientes = (ArrayList<Paciente>) controlePaciente.getPacientes();
-        Paciente p;
-
-        for (int i = 0; i < pacientes.size(); i++) {
-            p = pacientes.get(i);
-            if (p.getUsuario().getEmail().equals(login) && p.getUsuario().getSenha().equals(senha)) {
-               pacLogado = p;
-               break;
-            }
+        Paciente p = null;
+        p = repositorioLogin.buscarUsuarioPaciente(login, senha);
+        if(p != null){
+            pacLogado = p;
         }
     }
             
@@ -103,6 +96,5 @@ public class ControladorLogin {
 
     public void setPacLogado(Paciente pacLogado) {
         this.pacLogado = pacLogado;
-    }
-    
+    }   
 }
