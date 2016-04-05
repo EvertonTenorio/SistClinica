@@ -27,7 +27,7 @@ public class ControladorLogin {
     private Paciente pacLogado = null;
     private ControladorFuncionario controleFuncionario = null;
     private ControladorPaciente controlePaciente = null;
-    private RepositorioLoginImplDB repositorioLogin;
+    private RepositorioLoginImplDB repositorioLogin = null;
 
     public ControladorLogin() {
         HttpSession session = ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
