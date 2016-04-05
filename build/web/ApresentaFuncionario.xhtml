@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Lista de Funcionários</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" showDetail="true" sticky="false" life="3000"
+                 autoUpdate="true"/>
+
+        <ui:include src="menu.xhtml" />
+
+
+        <h:form>
+            <p:dataTable id="tabelaFuncionario" value="#{controleFuncionario.funcionarios}" var="item"
+                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
+                         selection="#{controleFuncionario.selectedFunc}">
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+
+                <p:column headerText="CPF" footerText="CPF">
+                    <h:outputText value="#{item.cpf}"/>
+                </p:column>
+
+                <p:column headerText="Celular" footerText="Celular">
+                    <h:outputText value="#{item.celular}"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton value="Visualizar dados do Funcionário" 
+                             update="dial1" oncomplete="PF('painel1').show()"/>
+            <p:commandButton value="Alterar" 
+                             oncomplete="location.href='AlteraFuncionario.xhtml'"/>
+            <p:commandButton value="Excluir" actionListener="#{controleFuncionario.deletarFuncionario(controleFuncionario.selectedFunc)}" 
+                             update="tabelaFuncionario">
+                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir este Funcionário?" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:dialog id="dial1" closable="false" resizable="false" modal="true"
+                      visible="false" widgetVar="painel1" header="Dados do Funcionário">
+
+                <p:panelGrid columns="2">
+                    
+                    <h:outputText value="Identificador"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.id}"/>
+
+                    <h:outputText value="Nome"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.nome}"/>
+
+                    <h:outputText value="CPF"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.cpf}"/>
+
+                    <h:outputText value="RG"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.rg}"/>
+
+                    <h:outputText value="Cep"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.cep}"/>
+
+                    <h:outputText value="Estado"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.estado}"/>
+
+                    <h:outputText value="Cidade"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.cidade}"/>
+
+                    <h:outputText value="Bairro"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.bairro}"/>
+
+                    <h:outputText value="Logradouro"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.logradouro}"/>
+
+                    <h:outputText value="Numero"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.endereco.numero}"/>
+
+                    <h:outputText value="Telefone Fixo"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.telefoneFixo}"/>
+
+                    <h:outputText value="Celular"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.celular}"/>
+                    
+                    <h:outputText value="Login"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.usuario.email}"/>
+
+                    <h:outputText value="Senha"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.usuario.senha}"/>
+
+                    <h:outputText value="Gênero"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.genero}"/>
+
+                    <h:outputText value="Salário"/>
+                    <h:outputText value="#{controleFuncionario.selectedFunc.salario}"/>
+
+                </p:panelGrid>
+
+                <p:commandLink value="fechar" 
+                               oncomplete="PF('painel1').hide()"/>
+
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>HOME</title>
+    </h:head>
+    <h:body>
+        <h:form id="formMenu" >
+            <p:growl id="gro" showDetail="true" life="3000" sticky="false"/>
+            <p:menubar>
+                <p:menuitem value="home" url="indexMenu.xhtml"/>
+                
+                               
+                <p:submenu label="Funcionário">
+                    <p:menuitem value="Cadastro" url="CadastroFuncionario.xhtml"/>
+                    <p:menuitem value="Apresentar" url="ApresentaFuncionario.xhtml"/>
+                </p:submenu>
+                <p:submenu label="Paciente">
+                    <p:menuitem value="Cadastro" url="CadastroPaciente.xhtml"/>
+                    <p:menuitem value="Apresentar" url="ApresentaPaciente.xhtml"/>
+                </p:submenu>
+                <p:submenu label="Especialidade">
+                    <p:menuitem value="Cadastro" url="CadastroEspecialidade.xhtml"/>
+                    <p:menuitem value="Apresentar" url="ApresentaEspecialidade.xhtml"/>
+                </p:submenu>
+                <p:submenu label="Médico">
+                    <p:menuitem value="Cadastro" url="CadastroMedico.xhtml"/>
+                    <p:menuitem value="Apresentar" url="ApresentaMedico.xhtml"/>
+                </p:submenu>                
+                <p:submenu label="Consulta">
+                    <p:menuitem value="Cadastro" url="CadastroConsulta.xhtml"/>
+                    <p:menuitem value="Apresentar" url="ApresentaConsulta.xhtml"/>
+                </p:submenu>
+                
+                
+                        <p:menuitem value="Sair" url="index.xhtml"/>                   
+                
+            </p:menubar>
+            <p:separator/>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Lista de Especialidades</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" showDetail="true" sticky="false" life="3000"
+                 autoUpdate="true"/>
+
+        <ui:include src="menu.xhtml" />
+
+
+        <h:form>
+            <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="item"
+                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
+                         selection="#{controleEspecialidade.selectedEspec}">
+                
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+
+            </p:dataTable>
+            <p:commandButton value="Visualizar dados da Especialidade" 
+                             update="dial1" oncomplete="PF('painel1').show()"/>
+            <p:commandButton value="Alterar" 
+                             oncomplete="location.href='AlteraEspecialidade.xhtml'"/>
+            <p:commandButton value="Excluir" actionListener="#{controleEspecialidade.deletarEspecialidade(controleEspecialidade.selectedEspec)}" 
+                             update="tabelaEspecialidade">
+                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esta Especialidade?" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:dialog id="dial1" closable="false" resizable="false" modal="true"
+                      visible="false" widgetVar="painel1" header="Dados da Especialidade">
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Identificador"/>
+                    <h:outputText value="#{controleEspecialidade.selectedEspec.id}"/>
+
+                    <h:outputText value="Nome"/>
+                    <h:outputText value="#{controleEspecialidade.selectedEspec.nome}"/>
+
+                </p:panelGrid>
+
+                <p:commandLink value="fechar" 
+                               oncomplete="PF('painel1').hide()"/>
+
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

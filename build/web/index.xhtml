@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Realizar Login</title>
+    </h:head>
+    <h:body>
+        <h:form id="form"> 
+            <p:growl id="gro" showDetail="true" life="4000" sticky="false"/>
+            <p:panel>
+                <p:commandButton value="LOGIN ADMINISTRADOR"  oncomplete="PF('dlg').show()" style="left: 40%" /> 
+
+                <p:dialog header="Login" widgetVar="dlg"  closable="false" resizable="false" modal="true"
+                          visible="false">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="loginA" value="Login:" />
+                        <p:inputText id="loginA" value="#{login}" required="true" label="login" />
+
+                        <h:outputLabel for="senhaA" value="Senha:" />
+                        <p:password id="senhaA" value="#{senha}" required="true" label="senha" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Entrar" action="#{controleLoginAdm.realizarLogin(login, senha)}"
+                                             update="form"/>
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:dialog>
+            </p:panel>
+        </h:form>
+        <h:form id="form1">
+            <p:panel>
+                <p:commandButton value="LOGIN FUNCIONÁRIO"  oncomplete="PF('dlg1').show()" style="left: 41%" />
+                <p:dialog header="Login" widgetVar="dlg1"  closable="false" resizable="false" modal="true"
+                          visible="false">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="login" value="Login:" />
+                        <p:inputText id="login" value="#{login}" required="true" label="login" />
+
+                        <h:outputLabel for="senha" value="Senha:" />
+                        <p:password id="senha" value="#{senha}" required="true" label="senha" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Entrar" action="#{controleLoginFunc.realizarLogin(login, senha)}"
+                                             update="form1"/>
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:dialog>            
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

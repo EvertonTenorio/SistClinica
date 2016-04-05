@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Lista de Médicos</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" showDetail="true" sticky="false" life="3000"
+                 autoUpdate="true"/>
+
+        <ui:include src="menu.xhtml" />
+
+
+        <h:form>
+            <p:dataTable id="tabelaMedico" value="#{controleMedico.medicos}" var="item"
+                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
+                         selection="#{controleMedico.selectedMed}">
+
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.nomeEspecialidade.nome}" filterBy="#{item.nomeEspecialidade.nome}"
+                          headerText="Especialidade" footerText="Especialidade">
+                    <h:outputText value="#{item.nomeEspecialidade.nome}"/>
+                </p:column>
+
+                <p:column headerText="CPF" footerText="CPF">
+                    <h:outputText value="#{item.cpf}"/>
+                </p:column>
+
+
+
+                <p:column headerText="Celular" footerText="Celular">
+                    <h:outputText value="#{item.celular}"/>
+                </p:column>
+
+                <p:column headerText="CRM">
+                    <h:outputText value="#{item.CRM}"/>
+                </p:column>
+
+            </p:dataTable>
+            <p:commandButton value="Visualizar dados do Médico" 
+                             update="dial1" oncomplete="PF('painel1').show()"/>
+            <p:commandButton value="Alterar" 
+                             oncomplete="location.href='AlteraMedico.xhtml'"/>
+            <p:commandButton value="Excluir" actionListener="#{controleMedico.deletarMedico(controleMedico.selectedMed)}" 
+                             update="tabelaMedico">
+                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir este Médico?" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:dialog id="dial1" closable="false" resizable="false" modal="true"
+                      visible="false" widgetVar="painel1" header="Dados do Médico">
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Identificador"/>
+                    <h:outputText value="#{controleMedico.selectedMed.id}"/>
+
+                    <h:outputText value="Nome"/>
+                    <h:outputText value="#{controleMedico.selectedMed.nome}"/>
+
+                    <h:outputText value="CPF"/>
+                    <h:outputText value="#{controleMedico.selectedMed.cpf}"/>
+
+                    <h:outputText value="RG"/>
+                    <h:outputText value="#{controleMedico.selectedMed.rg}"/>
+
+                    <h:outputText value="Cep"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.cep}"/>
+
+                    <h:outputText value="Estado"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.estado}"/>
+
+                    <h:outputText value="Cidade"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.cidade}"/>
+
+                    <h:outputText value="Bairro"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.bairro}"/>
+
+                    <h:outputText value="Logradouro"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.logradouro}"/>
+
+                    <h:outputText value="Numero"/>
+                    <h:outputText value="#{controleMedico.selectedMed.endereco.numero}"/>
+
+                    <h:outputText value="Telefone Fixo"/>
+                    <h:outputText value="#{controleMedico.selectedMed.telefoneFixo}"/>
+
+                    <h:outputText value="Celular"/>
+                    <h:outputText value="#{controleMedico.selectedMed.celular}"/>
+
+                    <h:outputText value="Gênero"/>
+                    <h:outputText value="#{controleMedico.selectedMed.genero}"/>
+
+                    <h:outputText value="CRM"/>
+                    <h:outputText value="#{controleMedico.selectedMed.CRM}"/>
+
+                    <h:outputText value="Especialidade"/>
+                    <h:outputText value="#{controleMedico.selectedMed.nomeEspecialidade.nome}"/>
+
+                </p:panelGrid>
+
+                <p:commandLink value="fechar" 
+                               oncomplete="PF('painel1').hide()"/>
+
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

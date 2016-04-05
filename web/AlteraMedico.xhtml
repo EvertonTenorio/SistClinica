@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Alterar Médico</title>
+    </h:head>
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+
+        <h:form id="form">
+            <p:wizard>
+                <p:tab id="dadosMedico" title="Dados do Médico">
+                    <p:panel header="Alterar os Dados do Médico">
+                        <p:messages/>
+
+                        <h:panelGrid columns="3">
+                            <h:outputText value="Nome"/>
+                            <p:inputText id="inputNome" value="#{controleMedico.selectedMed.nome}" 
+                                         required="true" requiredMessage="Digite o Nome"/>
+                            <p:message id="messageNome" for="inputNome"/>
+
+                            <h:outputText value="CPF"/>
+                            <p:inputText id="inputCPF" value="#{controleMedico.selectedMed.cpf}" 
+                                         required="true" requiredMessage="Digite o CPF"/>
+                            <p:message id="messageCPF" for="inputCPF"/>
+
+                            <h:outputText value="RG"/>
+                            <p:inputText id="inputRG" value="#{controleMedico.selectedMed.rg}"
+                                         required="true" requiredMessage="Digite o RG"/>
+                            <p:message id="messageRG" for="inputRG"/>
+
+                            <h:outputText value="Cep"/>
+                            <p:inputText id="inputCep" value="#{controleMedico.selectedMed.endereco.cep}" required="true" requiredMessage="Digite o Cep"/>
+                            <p:message id="messageCep" for="inputCep"/>
+                            
+                             <h:outputText value="Estado"/>
+                            <p:inputText id="inputEstado" value="#{controleMedico.selectedMed.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
+                            <p:message id="messageEstado" for="inputEstado"/>
+                             
+                            <h:outputText value="Cidade"/>
+                            <p:inputText id="inputCidade" value="#{controleMedico.selectedMed.endereco.cidade}" required="true" requiredMessage="Digite o Cidade"/>
+                            <p:message id="messageCidade" for="inputCidade"/>
+                            
+                            <h:outputText value="Bairro"/>
+                            <p:inputText id="inputBairro" value="#{controleMedico.selectedMed.endereco.bairro}" required="true" requiredMessage="Digite a Bairro"/>
+                            <p:message id="messageBairro" for="inputBairro"/>
+                            
+                            <h:outputText value="Logradouro"/>
+                            <p:inputText id="inputLogradouro" value="#{controleMedico.selectedMed.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
+                            <p:message id="messageLogradouro" for="inputLogradouro"/>
+                            
+                            <h:outputText value="Numero"/>
+                            <p:inputText id="inputNumero" value="#{controleMedico.selectedMed.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
+                            <p:message id="messageNumero" for="inputNumero"/>
+
+                            <h:outputText value="Telefone Fixo"/>
+                            <p:inputText id="inputTelefoneFixo" value="#{controleMedico.selectedMed.telefoneFixo}"/>
+                            <h:outputText/>
+
+                            <h:outputText value="Celular"/>
+                            <p:inputText id="inputCelular" value="#{controleMedico.selectedMed.celular}"/>
+                            <h:outputText/>
+
+                            <h:outputText value="Gênero"/>
+                            <p:inputText id="inputGenero" value="#{controleMedico.selectedMed.genero}"/>
+                            <h:outputText/>
+                            
+                            <h:outputText value="CRm "/>
+                            <p:inputText id="inputNcr" value="#{controleMedico.selectedMed.CRM}"/>
+                            <h:outputText/>
+                            
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="especialidadeFunc" title="Lista de Especialidades">
+                    <p:panel header="Selecione a(s) Especialidade(s) do Funcionário">
+                        <p:messages/>
+                        <h:panelGrid>
+
+                            <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="item"
+                                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single" 
+                                         selection="#{controleMedico.selectedMed.nomeEspecialidade}">
+
+                                <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                                    <h:outputText value="#{item.nome}"/>
+                                </p:column>
+
+                            </p:dataTable>  
+                        </h:panelGrid>
+
+                        <p:commandButton value="Alterar" action="#{controleMedico.alterarMedico(controleMedico.selectedMed)}" 
+                                         update="form"  style="left:600px"/>
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>   
+        </h:form>
+    </h:body>
+</html>

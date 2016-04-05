@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Lista de Clientes</title>    
+    </h:head>
+    <body>
+        <p:growl id="gro" showDetail="true" sticky="false" life="3000"
+                 autoUpdate="true"/>
+        
+        <ui:include src="menu.xhtml"/>
+        
+        <h:form>
+            <p:dataTable id="tabelaPaciente" value="#{controlePaciente.pacientes}" var="item"
+                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
+                         selection="#{controlePaciente.selectedPac}">
+                
+                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+                
+                <p:column headerText="CPF" footerText="CPF">
+                    <h:outputText value="#{item.cpf}"/>
+                </p:column>
+                
+                <p:column headerText="Telefone Fixo" footerText="Telefone Fixo">
+                    <h:outputText value="#{item.telefoneFixo}"/>
+                </p:column>
+            </p:dataTable>
+            
+            <p:commandButton value="Visualizar dados do Paciente" 
+                             update="dial1" oncomplete="PF('painel1').show()"/>
+            <p:commandButton value="alterar" 
+                             oncomplete="location.href='AlteraPaciente.xhtml'"/>
+            <p:commandButton value="Excluir" actionListener="#{controlePaciente.deletarPaciente(controlePaciente.selectedPac)}" 
+                             update="tabelaPaciente">
+                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir este Paciente?" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:dialog id="dial1" closable="false" resizable="false" modal="true"
+                      visible="false" widgetVar="painel1" header="Dados do Paciente">
+                <p:panelGrid columns="2">
+                    
+                    <h:outputText value="Identificador"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.id}"/>
+
+                    <h:outputText value="Nome"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.nome}"/>
+
+                    <h:outputText value="CPF"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.cpf}"/>
+
+                    <h:outputText value="RG"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.rg}"/>
+
+                    <h:outputText value="Cep"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.cep}"/>
+
+                    <h:outputText value="Estado"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.estado}"/>
+
+                    <h:outputText value="Cidade"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.cidade}"/>
+
+                    <h:outputText value="Bairro"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.bairro}"/>
+
+                    <h:outputText value="Logradouro"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.logradouro}"/>
+
+                    <h:outputText value="Numero"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.endereco.numero}"/>
+
+                    <h:outputText value="Telefone"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.telefoneFixo}"/>
+
+                    <h:outputText value="Celular"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.celular}"/>
+                    
+                    <h:outputText value="Email"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.usuario.email}"/>
+                    
+                    <h:outputText value="Senha"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.usuario.senha}"/>
+                    
+                    <h:outputText value="Gênero"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.genero}"/>
+
+                </p:panelGrid>
+
+                <p:commandLink value="fechar" 
+                               oncomplete="PF('painel1').hide()"/>
+            </p:dialog>
+        </h:form>
+        
+    </body>
+</html>

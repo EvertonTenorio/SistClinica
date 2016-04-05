@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Cliente</title>
+    </h:head>
+    <body>
+        <ui:include src="menu.xhtml"/>
+        
+        <h:form id="form">
+            <p:messages/>
+            <p:fieldset legend="Cadastro de Paciente">
+                <p:panelGrid columns="6">
+                    <h:outputText value="Nome"/>
+                        <p:inputText id="inputNome" value="#{cpaciente.nome}" required="true"
+                                     requiredMessage="Digite o Nome"/>
+                        <p:message id="messageNome" for="inputNome" />
+
+                        <h:outputText value="Cep"/>
+                        <p:inputMask mask="99999-999" id="inputCep" value="#{cpaciente.endereco.cep}" required="true" requiredMessage="Digite o Cep"/>
+                        <p:message id="messageCep" for="inputCep"/>
+
+
+                        <h:outputText value="CPF"/>
+                        <p:inputMask mask="999.999.999-99" id="inputCPF"  
+                                     value="#{cpaciente.cpf}" requiredMessage="Digite O CPF"/>
+                        <p:message id="messageCPF" for="inputCPF"/>
+
+                        <h:outputText value="Estado"/>
+
+
+                        <h:outputText value="RG"/>
+                        <p:inputMask mask="9.999.999" id="inputRG" value="#{cpaciente.rg}" required="true" 
+                                     requiredMessage="Digite o RG"/>
+                        <p:message id="messageRG" for="inputRG"/>
+                        <h:outputText />
+
+                        <h:outputText value="Cidade"/>
+                        <p:inputText id="inputCidade" value="#{cpaciente.endereco.cidade}" required="true" requiredMessage="Digite o Cidade"/>
+                        <p:message id="messageCidade" for="inputCidade"/>
+
+                        <h:outputText value="telefone Fixo"/>
+                        <p:inputMask id="inputTelefoneFixo" value="#{cpaciente.telefoneFixo}" mask="(999) 9999-9999"/>
+                        <h:outputText />
+
+                        <h:outputText value="Bairro"/>
+                        <p:inputText id="inputBairro" value="#{cpaciente.endereco.bairro}" required="true" requiredMessage="Digite a Bairro"/>
+                        <p:message id="messageBairro" for="inputBairro"/>
+
+
+                        <h:outputText value="Celular" />
+                        <p:inputMask id="inputCelular" value="#{cpaciente.celular}" mask="(999) 99999-9999"/>
+                        <h:outputText />
+
+
+                        <h:outputText value="Logradouro"/>
+                        <p:inputText id="inputLogradouro" value="#{cpaciente.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
+                        <p:message id="messageLogradouro" for="inputLogradouro"/>
+
+
+                        <h:outputText value="Login"/>
+                        <p:inputText id="inputLogin" value="#{cpaciente.usuario.email}" required="true"
+                                     requiredMessage="Digite o Login"/>
+
+                        <p:message id="messageLogin" for="inputLogin"/>
+                        <h:outputText />
+
+                        <h:outputText value="Numero"/>
+                        <p:inputMask mask="99999" id="inputNumero" value="#{cpaciente.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
+                        <p:message id="messageNumero" for="inputNumero"/>
+                        
+
+                        <h:outputText value="Senha " />
+                        <p:password id="nonFeedback" value="#{cpaciente.usuario.senha}" />
+                        <h:outputText value=""/>
+                        <h:outputText />
+
+
+                        <h:outputText value="Gênero" />
+                        <p:selectOneRadio id="Gênero" value="#{cpaciente.genero}">
+                            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+
+                        </p:selectOneRadio>
+
+                      
+                </p:panelGrid>
+                <p:commandButton value="Cadastrar"  action="#{controlePaciente.inserircPaciente(cpaciente.construirPaciente())}"
+                                 update="form"/>
+        </h:form>
+    </body>
+</html>
