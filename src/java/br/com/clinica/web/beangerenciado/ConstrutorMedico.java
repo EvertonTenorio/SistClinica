@@ -21,10 +21,10 @@ public class ConstrutorMedico {
 
     private String Nome;
     private String Cpf;
-    private Long Rg;
+    private String Rg;
     private Endereco endereco;
-    private Long TelefoneFixo;
-    private Long Celular;
+    private String TelefoneFixo;
+    private String Celular;
     private String Genero;
     private String CRM;
     private Especialidade NomeEspecialidade;
@@ -46,19 +46,14 @@ public class ConstrutorMedico {
     }
 
     public void setCpf(String Cpf) {
-        Cpf = Cpf.trim();
-
-        for (int i = Cpf.length() - 1; i < 10; i++) {
-            Cpf = "0" + Cpf;
-        }
         this.Cpf = Cpf;
     }
 
-    public Long getRg() {
+    public String getRg() {
         return Rg;
     }
 
-    public void setRg(Long Rg) {
+    public void setRg(String Rg) {
         this.Rg = Rg;
     }
 
@@ -70,19 +65,19 @@ public class ConstrutorMedico {
         this.endereco = endereco;
     }
 
-    public Long getTelefoneFixo() {
+    public String getTelefoneFixo() {
         return TelefoneFixo;
     }
 
-    public void setTelefoneFixo(Long TelefoneFixo) {
+    public void setTelefoneFixo(String TelefoneFixo) {
         this.TelefoneFixo = TelefoneFixo;
     }
 
-    public Long getCelular() {
+    public String getCelular() {
         return Celular;
     }
 
-    public void setCelular(Long Celular) {
+    public void setCelular(String Celular) {
         this.Celular = Celular;
     }
 
@@ -101,8 +96,6 @@ public class ConstrutorMedico {
     public void setCRM(String CRM) {
         this.CRM = CRM;
     }
-
-    
 
     public Especialidade getNomeEspecialidade() {
         return NomeEspecialidade;

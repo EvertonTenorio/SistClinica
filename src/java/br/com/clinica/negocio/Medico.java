@@ -28,11 +28,11 @@ public class Medico implements Serializable {
     @Column(length = 15, nullable = false, unique = true)
     private String Cpf;
     @Column(length = 15, nullable = false, unique = true)
-    private Long Rg;
+    private String Rg;
     @Column(length = 14)
-    private Long TelefoneFixo;
+    private String TelefoneFixo;
     @Column(length = 14)
-    private Long Celular;
+    private String Celular;
     @Column(length = 1)
     private String Genero;
     @Column(length = 15, unique = true)
@@ -47,8 +47,8 @@ public class Medico implements Serializable {
         endereco= new Endereco();
     }
 
-    public Medico(String Nome, String Cpf, Long Rg, Endereco endereco, Long TelefoneFixo,
-            Long Celular, String Genero, String CRM, Especialidade NomeEspecialidade) {
+    public Medico(String Nome, String Cpf, String Rg, Endereco endereco, String TelefoneFixo,
+            String Celular, String Genero, String CRM, Especialidade NomeEspecialidade) {
         this.Nome = Nome;
         this.Cpf = Cpf;
         this.Rg = Rg;
@@ -84,11 +84,11 @@ public class Medico implements Serializable {
         this.Cpf = Cpf;
     }
 
-    public Long getRg() {
+    public String getRg() {
         return Rg;
     }
 
-    public void setRg(Long Rg) {
+    public void setRg(String Rg) {
         this.Rg = Rg;
     }
 
@@ -100,19 +100,19 @@ public class Medico implements Serializable {
         this.endereco = endereco;
     }
 
-    public Long getTelefoneFixo() {
+    public String getTelefoneFixo() {
         return TelefoneFixo;
     }
 
-    public void setTelefoneFixo(Long TelefoneFixo) {
+    public void setTelefoneFixo(String TelefoneFixo) {
         this.TelefoneFixo = TelefoneFixo;
     }
 
-    public Long getCelular() {
+    public String getCelular() {
         return Celular;
     }
 
-    public void setCelular(Long Celular) {
+    public void setCelular(String Celular) {
         this.Celular = Celular;
     }
 
