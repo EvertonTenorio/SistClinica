@@ -17,7 +17,7 @@
                     <p:panel header="Insira os Dados do Médico">
                         <p:messages/>
 
-                        <h:panelGrid columns="6">
+                        <p:panelGrid columns="6">
                             <h:outputText value="Nome"/>
                     <p:inputText id="inputNome" value="#{cmedico.nome}" required="true"
                                  requiredMessage="Digite o Nome"/>
@@ -62,37 +62,20 @@
                     <p:inputText id="inputLogradouro" value="#{cmedico.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
                     <p:message id="messageLogradouro" for="inputLogradouro"/>
 
-
-                    <h:outputText value="Login"/>
-                    <p:inputText id="inputLogin" value="#{cmedico.usuario.email}" required="true"
-                                 requiredMessage="Digite o Login"/>
-                    <p:message id="messageLogin" for="inputLogin"/>
-
-                    <h:outputText value="Numero"/>
-                    <p:inputMask mask="99999" id="inputNumero" value="#{cmedico.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
-
-                    <p:message id="messageNumero" for="inputNumero"/>
-
-                    <h:outputText value="Senha"/>
-                    <p:password id="inputSenha" value="#{cmedico.usuario.senha}" />
-                    <p:message id="messageSenha" for="inputSenha"/>
-                    <h:outputText/>
-                    <h:outputText/>
-                    <h:outputText/>
-
-                   
-                    <h:outputText/>
-                    <h:outputText/>
-                    <h:outputText/>
-
                     <h:outputText value="Gênero" />
                     <p:selectOneRadio id="Gênero" value="#{cmedico.genero}">
                         <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
                         <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 
                     </p:selectOneRadio>
+                     
+                    <h:outputText/>
+                    
+                    <h:outputText value="Numero"/>
+                    <p:inputMask mask="99999" id="inputNumero" value="#{cmedico.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
 
-                </p:panelGrid>
+                    <p:message id="messageNumero" for="inputNumero"/>
+                 </p:panelGrid>
                         <p:commandButton value="Cadastrar" action="#{controleMedico.inserirMedico(cmedico.construirMedico())}" 
                                          update="form"  style="left:600px"/>
 
