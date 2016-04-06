@@ -28,14 +28,14 @@ public class Paciente implements Serializable {
     @Column(length = 80, nullable = false)
     private String Nome;
     @Column(length = 11, nullable = false, unique = true)
-    private String Cpf;
+    private Long Cpf;
     @Column(length = 11, nullable = false, unique = true)
     private Long Rg;
     @Column(length = 14)
-    private Long TelefoneFixo;
+    private String TelefoneFixo;
     @Column(length = 14)
-    private Long Celular;
-    @Column(length = 1)
+    private String Celular;
+    @Column(length = 15)
     private String Genero;
 
     @Embedded
@@ -49,7 +49,7 @@ public class Paciente implements Serializable {
         usuario = new Usuario();
     }
 
-    public Paciente(Integer Id, String Nome, String Cpf, Long Rg, Endereco endereco, Long TelefoneFixo, Long Celular,
+    public Paciente(Integer Id, String Nome, Long Cpf, Long Rg, Endereco endereco, String TelefoneFixo, String Celular,
             String Genero, Usuario usuario) {
         this.Id = Id;
         this.Nome = Nome;
@@ -78,13 +78,7 @@ public class Paciente implements Serializable {
         this.Nome = Nome;
     }
 
-    public String getCpf() {
-        return Cpf;
-    }
-
-    public void setCpf(String Cpf) {
-        this.Cpf = Cpf;
-    }
+  
 
     public Long getRg() {
         return Rg;
@@ -102,21 +96,7 @@ public class Paciente implements Serializable {
         this.endereco = endereco;
     }
 
-    public Long getTelefoneFixo() {
-        return TelefoneFixo;
-    }
-
-    public void setTelefoneFixo(Long TelefoneFixo) {
-        this.TelefoneFixo = TelefoneFixo;
-    }
-
-    public Long getCelular() {
-        return Celular;
-    }
-
-    public void setCelular(Long Celular) {
-        this.Celular = Celular;
-    }
+    
 
     public String getGenero() {
         return Genero;
@@ -128,6 +108,30 @@ public class Paciente implements Serializable {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Long getCpf() {
+        return Cpf;
+    }
+
+    public void setCpf(Long Cpf) {
+        this.Cpf = Cpf;
+    }
+
+    public String getTelefoneFixo() {
+        return TelefoneFixo;
+    }
+
+    public void setTelefoneFixo(String TelefoneFixo) {
+        this.TelefoneFixo = TelefoneFixo;
+    }
+
+    public String getCelular() {
+        return Celular;
+    }
+
+    public void setCelular(String Celular) {
+        this.Celular = Celular;
     }
 
     public void setUsuario(Usuario usuario) {

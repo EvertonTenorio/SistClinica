@@ -20,7 +20,7 @@ import javax.faces.bean.ViewScoped;
 public class ConstrutorMedico {
 
     private String Nome;
-    private String Cpf;
+    private Long Cpf;
     private String Rg;
     private Endereco endereco;
     private String TelefoneFixo;
@@ -41,13 +41,15 @@ public class ConstrutorMedico {
         this.Nome = Nome;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return Cpf;
     }
 
-    public void setCpf(String Cpf) {
+    public void setCpf(Long Cpf) {
         this.Cpf = Cpf;
     }
+
+  
 
     public String getRg() {
         return Rg;

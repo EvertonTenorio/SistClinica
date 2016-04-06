@@ -26,14 +26,14 @@ public class Medico implements Serializable {
     @Column(length = 80, nullable = false)
     private String Nome;
     @Column(length = 15, nullable = false, unique = true)
-    private String Cpf;
+    private Long Cpf;
     @Column(length = 15, nullable = false, unique = true)
     private String Rg;
     @Column(length = 14)
     private String TelefoneFixo;
     @Column(length = 14)
     private String Celular;
-    @Column(length = 1)
+    @Column(length = 15)
     private String Genero;
     @Column(length = 15, unique = true)
     private String CRM;
@@ -47,7 +47,7 @@ public class Medico implements Serializable {
         endereco= new Endereco();
     }
 
-    public Medico(String Nome, String Cpf, String Rg, Endereco endereco, String TelefoneFixo,
+    public Medico(String Nome, Long Cpf, String Rg, Endereco endereco, String TelefoneFixo,
             String Celular, String Genero, String CRM, Especialidade NomeEspecialidade) {
         this.Nome = Nome;
         this.Cpf = Cpf;
@@ -76,13 +76,15 @@ public class Medico implements Serializable {
         this.Nome = Nome;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return Cpf;
     }
 
-    public void setCpf(String Cpf) {
+    public void setCpf(Long Cpf) {
         this.Cpf = Cpf;
     }
+
+ 
 
     public String getRg() {
         return Rg;

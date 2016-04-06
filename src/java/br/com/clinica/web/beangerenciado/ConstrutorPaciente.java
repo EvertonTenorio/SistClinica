@@ -24,11 +24,11 @@ public class ConstrutorPaciente {
 
     private Integer Id;
     private String Nome;
-    private String Cpf;
+    private Long Cpf;
     private Long Rg;
     private Endereco endereco;
-    private Long TelefoneFixo;
-    private Long Celular;
+    private String TelefoneFixo;
+    private String Celular;
     private String Genero;
     private Usuario usuario;
 
@@ -53,18 +53,15 @@ public class ConstrutorPaciente {
         this.Nome = Nome;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return Cpf;
     }
 
-    public void setCpf(String Cpf) {
-        Cpf = Cpf.trim();
-
-        for (int i = Cpf.length() - 1; i < 10; i++) {
-            Cpf = "0" + Cpf;
-        }
+    public void setCpf(Long Cpf) {
         this.Cpf = Cpf;
     }
+
+   
 
     public Long getRg() {
         return Rg;
@@ -82,22 +79,23 @@ public class ConstrutorPaciente {
         this.endereco = endereco;
     }
 
-    public Long getTelefoneFixo() {
+    public String getTelefoneFixo() {
         return TelefoneFixo;
     }
 
-    public void setTelefoneFixo(Long TelefoneFixo) {
+    public void setTelefoneFixo(String TelefoneFixo) {
         this.TelefoneFixo = TelefoneFixo;
     }
 
-    public Long getCelular() {
+    public String getCelular() {
         return Celular;
     }
 
-    public void setCelular(Long Celular) {
+    public void setCelular(String Celular) {
         this.Celular = Celular;
     }
 
+   
     public String getGenero() {
         return Genero;
     }
