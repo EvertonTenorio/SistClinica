@@ -28,16 +28,16 @@ public class Funcionario  implements Serializable{
     @Column(length = 80, nullable = false)
     private String Nome;
     @Column(length = 11, nullable = false, unique = true)
-    private String Cpf;
+    private Long Cpf;
     @Column(length = 11, nullable = false, unique = true)
     private Long Rg;
     @Column(length = 14)
-    private Long TelefoneFixo;
+    private String TelefoneFixo;
     @Column(length = 14)
-    private Long Celular;
+    private String Celular;
     @Column(length = 7)
     private Double Salario;
-    @Column(length = 1)
+    @Column(length = 15)
     private String Genero;
     @Embedded
     private Endereco endereco;
@@ -50,7 +50,7 @@ public class Funcionario  implements Serializable{
         usuario = new Usuario();
     }
 
-    public Funcionario(Long Id, String Nome, String Cpf, Long Rg, Endereco endereco, Long TelefoneFixo, Long Celular,
+    public Funcionario(Long Id, String Nome, Long Cpf, Long Rg, Endereco endereco, String TelefoneFixo, String Celular,
             Double Salario, String Genero, Usuario usuario) {
 
         this.Id = Id;
@@ -82,11 +82,11 @@ public class Funcionario  implements Serializable{
         this.Nome = Nome;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return Cpf;
     }
 
-    public void setCpf(String Cpf) {
+    public void setCpf(Long Cpf) {
         this.Cpf = Cpf;
     }
 
@@ -106,19 +106,19 @@ public class Funcionario  implements Serializable{
         this.endereco = endereco;
     }
 
-    public Long getTelefoneFixo() {
+    public String getTelefoneFixo() {
         return TelefoneFixo;
     }
 
-    public void setTelefoneFixo(Long TelefoneFixo) {
+    public void setTelefoneFixo(String TelefoneFixo) {
         this.TelefoneFixo = TelefoneFixo;
     }
 
-    public Long getCelular() {
+    public String getCelular() {
         return Celular;
     }
 
-    public void setCelular(Long Celular) {
+    public void setCelular(String Celular) {
         this.Celular = Celular;
     }
 

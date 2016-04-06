@@ -30,7 +30,6 @@
                                  value="#{cfuncionario.cpf}" requiredMessage="Digite O CPF"/>
 
                     <p:message id="messageCPF" for="inputCPF"/>
-                    
                     <h:outputText value="Estado"/>
                     <p:inputText id="inputEstado" value="#{cfuncionario.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
                     <p:message id="messageEstado" for="inputEstado"/>
@@ -43,35 +42,37 @@
                     <h:outputText value="Cidade"/>
                     <p:inputText id="inputCidade" value="#{cfuncionario.endereco.cidade}" required="true" requiredMessage="Digite o Cidade"/>
                     <p:message id="messageCidade" for="inputCidade"/>
-                    
                     <h:outputText value="Telefone Fixo"/>
                     <p:inputMask id="inputTelefoneFixo" value="#{cfuncionario.telefoneFixo}" mask="(999) 9999-9999"/>
+
                     <h:outputText/>
-                    
                     <h:outputText value="Bairro"/>
                     <p:inputText id="inputBairro" value="#{cfuncionario.endereco.bairro}" required="true" requiredMessage="Digite a Bairro"/>
                     <p:message id="messageBairro" for="inputBairro"/>
 
                     <h:outputText value="Celular"/>
                     <p:inputMask id="inputCelular" value="#{cfuncionario.celular}" mask="(999) 99999-9999"/>
+
                     <h:outputText/>
 
                     <h:outputText value="Logradouro"/>
                     <p:inputText id="inputLogradouro" value="#{cfuncionario.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
                     <p:message id="messageLogradouro" for="inputLogradouro"/>
 
+
                     <h:outputText value="Login"/>
-                    <p:inputText id="inputLogin" value="#{cfuncionario.usuario.email}" required="true" requiredMessage="Digite o Login"/>
+                    <p:inputText id="inputLogin" value="#{cfuncionario.usuario.email}" required="true"
+                                 requiredMessage="Digite o Login"/>
                     <p:message id="messageLogin" for="inputLogin"/>
 
                     <h:outputText value="Numero"/>
                     <p:inputMask mask="99999" id="inputNumero" value="#{cfuncionario.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
+
                     <p:message id="messageNumero" for="inputNumero"/>
 
                     <h:outputText value="Senha"/>
                     <p:password id="inputSenha" value="#{cfuncionario.usuario.senha}" />
                     <p:message id="messageSenha" for="inputSenha"/>
-                    
                     <h:outputText/>
                     <h:outputText/>
                     <h:outputText/>
@@ -80,7 +81,6 @@
                     <p:inputText id="inputSalario" value="#{cfuncionario.salario}" required="true"
                                  requiredMessage="Digite o Salário"/>
                     <p:message id="messageSalario" for="inputSalario"/>
-                    
                     <h:outputText/>
                     <h:outputText/>
                     <h:outputText/>
@@ -89,6 +89,7 @@
                     <p:selectOneRadio id="Gênero" value="#{cfuncionario.genero}">
                         <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
                         <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+
                     </p:selectOneRadio>
 
                 </p:panelGrid>
