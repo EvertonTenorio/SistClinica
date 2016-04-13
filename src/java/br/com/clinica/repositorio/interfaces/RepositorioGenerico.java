@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 public interface RepositorioGenerico <T> {
     

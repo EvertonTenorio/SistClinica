@@ -30,17 +30,18 @@ and open the template in the editor.
 
                     <p:message id="messageCep" for="inputCep"/>
 
-                    <h:outputText value="CPF"/>
-                    <p:inputMask mask="999.999.999-99" id="inputCPF"  
+                  
+                    
+                     <h:outputText value="CPF"/>
+                    <p:inputMask mask="999.999.999-99" id="inputCPF"  maxlength="11" converter="convertInput" 
                                  value="#{cpaciente.cpf}" requiredMessage="Digite O CPF"/>
-
-                    <p:message id="messageCPF" for="inputCPF"/>
+                     <p:message id="messageCPF" for="inputCPF"/>
                     <h:outputText value="Estado"/>
                     <p:inputText id="inputEstado" value="#{cpaciente.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
                     <p:message id="messageEstado" for="inputEstado"/>
 
                     <h:outputText value="RG"/>
-                    <p:inputMask mask="9.999.999" id="inputRG" value="#{cpaciente.rg}" required="true" 
+                    <p:inputText id="inputRG" value="#{cpaciente.rg}" required="true" 
                                  requiredMessage="Digite o RG"/>
                     <p:message id="messageRG" for="inputRG"/>
 
@@ -87,8 +88,8 @@ and open the template in the editor.
 
                     <h:outputText value="Gênero" />
                     <p:selectOneRadio id="Gênero" value="#{cpaciente.genero}">
-                        <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
 
                     </p:selectOneRadio>
 

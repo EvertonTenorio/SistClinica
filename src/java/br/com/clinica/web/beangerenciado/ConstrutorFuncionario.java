@@ -13,7 +13,7 @@ import javax.faces.bean.RequestScoped;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 @ManagedBean(name = "cfuncionario")
 @RequestScoped

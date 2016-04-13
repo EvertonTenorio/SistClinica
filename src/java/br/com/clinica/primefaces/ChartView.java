@@ -34,7 +34,7 @@ import org.primefaces.model.chart.LineChartSeries;
 
 /**
  *
- * @author 1860915
+ * @author Jackson
  */
 
 @ManagedBean

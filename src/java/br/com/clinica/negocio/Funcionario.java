@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 @Entity
 @Table(name = "funcionario")
@@ -31,9 +31,9 @@ public class Funcionario  implements Serializable{
     private Long Cpf;
     @Column(length = 11, nullable = false, unique = true)
     private Long Rg;
-    @Column(length = 14)
+    @Column(length = 25)
     private String TelefoneFixo;
-    @Column(length = 14)
+    @Column(length = 25)
     private String Celular;
     @Column(length = 7)
     private Double Salario;

@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 @ManagedBean(name="controleEspecialidade")
 @SessionScoped

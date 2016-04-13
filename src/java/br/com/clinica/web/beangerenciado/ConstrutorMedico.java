@@ -13,7 +13,7 @@ import javax.faces.bean.ViewScoped;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 @ManagedBean(name = "cmedico")
 @ViewScoped

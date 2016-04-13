@@ -26,7 +26,7 @@
                     <p:message id="messageCep" for="inputCep"/>
 
                     <h:outputText value="CPF"/>
-                    <p:inputMask mask="999.999.999-99" id="inputCPF"  
+                    <p:inputMask mask="999.999.999-99" id="inputCPF"  maxlength="11" converter="convertInput" 
                                  value="#{cfuncionario.cpf}" requiredMessage="Digite O CPF"/>
 
                     <p:message id="messageCPF" for="inputCPF"/>
@@ -35,7 +35,8 @@
                     <p:message id="messageEstado" for="inputEstado"/>
 
                     <h:outputText value="RG"/>
-                    <p:inputMask mask="9.999.999" id="inputRG" value="#{cfuncionario.rg}" required="true" 
+                    <p:inputText id="inputRG" maxlength="11"
+                                 value="#{cfuncionario.rg}" required="true" 
                                  requiredMessage="Digite o RG"/>
                     <p:message id="messageRG" for="inputRG"/>
 
@@ -87,8 +88,8 @@
 
                     <h:outputText value="Gênero" />
                     <p:selectOneRadio id="Gênero" value="#{cfuncionario.genero}">
-                        <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
 
                     </p:selectOneRadio>
 

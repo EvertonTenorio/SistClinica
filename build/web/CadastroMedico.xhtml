@@ -17,7 +17,7 @@
                     <p:panel header="Insira os Dados do Médico">
                         <p:messages/>
 
-                        <p:panelGrid columns="6">
+                        <h:panelGrid columns="6">
                             <h:outputText value="Nome"/>
                     <p:inputText id="inputNome" value="#{cmedico.nome}" required="true"
                                  requiredMessage="Digite o Nome"/>
@@ -28,17 +28,18 @@
 
                     <p:message id="messageCep" for="inputCep"/>
 
-                    <h:outputText value="CPF"/>
-                    <p:inputMask mask="999.999.999-99" id="inputCPF"  
+                  
+                    
+                     <h:outputText value="CPF"/>
+                    <p:inputMask mask="999.999.999-99" id="inputCPF"  maxlength="11" converter="convertInput" 
                                  value="#{cmedico.cpf}" requiredMessage="Digite O CPF"/>
-
-                    <p:message id="messageCPF" for="inputCPF"/>
+                     <p:message id="messageCPF" for="inputCPF"/>
                     <h:outputText value="Estado"/>
                     <p:inputText id="inputEstado" value="#{cmedico.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
                     <p:message id="messageEstado" for="inputEstado"/>
 
                     <h:outputText value="RG"/>
-                    <p:inputMask mask="9.999.999" id="inputRG" value="#{cmedico.rg}" required="true" 
+                    <p:inputText id="inputRG" value="#{cmedico.rg}" required="true" 
                                  requiredMessage="Digite o RG"/>
                     <p:message id="messageRG" for="inputRG"/>
 
@@ -62,20 +63,53 @@
                     <p:inputText id="inputLogradouro" value="#{cmedico.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
                     <p:message id="messageLogradouro" for="inputLogradouro"/>
 
-                    <h:outputText value="Gênero" />
-                    <p:selectOneRadio id="Gênero" value="#{cmedico.genero}">
-                        <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                     <h:outputText value="CRM"/>
+                     <p:inputText id="inputCRM" value="#{cmedico.CRM}" required="true" requiredMessage="Digite o CRM"/>
 
-                    </p:selectOneRadio>
-                     
-                    <h:outputText/>
-                    
+                    <p:message id="messageCRM" for="inputCRM"/>
+                   
                     <h:outputText value="Numero"/>
                     <p:inputMask mask="99999" id="inputNumero" value="#{cmedico.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
 
                     <p:message id="messageNumero" for="inputNumero"/>
-                 </p:panelGrid>
+
+                 
+
+                    
+                   
+
+                    <h:outputText value="Gênero" />
+                    <p:selectOneRadio id="Gênero" value="#{cmedico.genero}">
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+
+                    </p:selectOneRadio>
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="especialidadeFunc" title="Lista de Especialidades">
+                    <p:panel header="Selecione a(s) Especialidade(s) do Funcionário">
+                        <p:messages/>
+                        <h:panelGrid>
+
+                            <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="item"
+                                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single" 
+                                         selection="#{cmedico.nomeEspecialidade}">
+
+                                <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
+                                    <h:outputText value="#{item.nome}"/>
+                                </p:column>
+
+                            </p:dataTable>  
+                        </h:panelGrid>
+
                         <p:commandButton value="Cadastrar" action="#{controleMedico.inserirMedico(cmedico.construirMedico())}" 
                                          update="form"  style="left:600px"/>
 

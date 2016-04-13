@@ -14,7 +14,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Jackson Carvalho
+ * @author Jackson 
  */
 @Embeddable
 

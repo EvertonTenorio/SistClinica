@@ -31,9 +31,9 @@ public class Paciente implements Serializable {
     private Long Cpf;
     @Column(length = 11, nullable = false, unique = true)
     private Long Rg;
-    @Column(length = 14)
+    @Column(length = 25)
     private String TelefoneFixo;
-    @Column(length = 14)
+    @Column(length = 25)
     private String Celular;
     @Column(length = 15)
     private String Genero;

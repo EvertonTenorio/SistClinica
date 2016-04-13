@@ -13,7 +13,7 @@ import javafx.scene.chart.PieChart.Data;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> {
 

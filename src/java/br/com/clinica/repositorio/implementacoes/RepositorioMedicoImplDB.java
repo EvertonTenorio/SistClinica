@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Mayara
+ * @author Jackson
  */
 public class RepositorioMedicoImplDB implements RepositorioGenerico<Medico> {
 
