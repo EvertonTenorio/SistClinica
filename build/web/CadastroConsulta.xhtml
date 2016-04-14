@@ -11,6 +11,28 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Cadastro de Consulta</title>
+        <script>
+            PrimeFaces.locales['pt'] = {  
+                closeText: 'Fechar',  
+                prevText: 'Anterior',  
+                nextText: 'Próximo',     
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+                dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+                weekHeader: 'Semana',  
+                firstDay: 0,  
+                isRTL: false,  
+                showMonthAfterYear: false,  
+                ampm: false,  
+                month: 'Mês',  
+                week: 'Semana',  
+                day: 'Dia',  
+                allDayText : 'Todo Dia'  
+            };
+        </script>
+            
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
@@ -21,8 +43,9 @@ and open the template in the editor.
                     <p:panel header="Selecione a Data e/ou a Hora da Consulta">
                         <p:messages/>
                         <h:panelGrid columns="3">
-                            <p:outputLabel for="inputData" value="Data e Hora da Consulta:" />
-                            <p:calendar id="inputData" value="#{cconsulta.data}" pattern=" dd/MM/yyyy HH:mm:ss" 
+                            <p:outputLabel for="inputData" value="Data da Consulta:" />
+                            <p:calendar id="inputData" value="#{cconsulta.data}" pattern=" dd/MM/yyyy" mode="inline" 
+                                        disabledWeekends="true" locale="pt" mindate="0" 
                                         required="true" requiredMessage="Selecione a Data e a Hora da Consulta"/>
                             <p:message id="messageData" for="inputData"/>
 
