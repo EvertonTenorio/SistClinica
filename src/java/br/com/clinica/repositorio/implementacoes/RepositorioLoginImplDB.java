@@ -8,6 +8,8 @@ package br.com.clinica.repositorio.implementacoes;
 import br.com.clinica.dao.DaoManagerHiber;
 import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,19 +18,28 @@ import br.com.clinica.negocio.Paciente;
 public class RepositorioLoginImplDB {
     
     public Paciente buscarUsuarioPaciente(String email, String senha){
-        Paciente usuario;
+        Paciente usuario = null;
+        List<Paciente> paciente;
         
-        usuario = (Paciente)DaoManagerHiber.getInstance().recover("from paciente where email=" + email +
-                " and senha="+senha);
+        paciente = (List<Paciente>)DaoManagerHiber.getInstance().recover("from Paciente where email='" + email +
+                "' and senha='"+senha+"'");
+        
+        if(paciente.size() > 0){
+        usuario = paciente.get(0);    
+        }
         
         return usuario;
     }
     
     public Funcionario buscarUsuarioFuncionario(String email, String senha){
-        Funcionario usuario;
+        Funcionario usuario = null;
+        List<Funcionario> funcionario;
         
-        usuario = (Funcionario)DaoManagerHiber.getInstance().recover("from funcionario where email=" + email +
-                " and senha="+senha);
+        funcionario = (List<Funcionario>) DaoManagerHiber.getInstance().recover("from Funcionario where email='" + email +
+                "' and senha='"+senha+"'");
+        if(funcionario.size() > 0){
+            usuario = funcionario.get(0);
+        }
         
         return usuario;
     }

@@ -8,6 +8,7 @@ package br.com.clinica.controladores;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.repositorio.implementacoes.RepositorioConsultaImplDB;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,9 +24,19 @@ import javax.faces.context.FacesContext;
 public class ControladorConsulta {
     private RepositorioGenerico<Consulta> repositorioConsulta= null;
     private Consulta selectedCons;
+    private List<String> ListaHorarios;
     
     public ControladorConsulta(){
         this.repositorioConsulta= new RepositorioConsultaImplDB();
+        this.ListaHorarios = new ArrayList<>();
+        this.ListaHorarios.add("08:00");
+        this.ListaHorarios.add("09:00");
+        this.ListaHorarios.add("10:00");
+        this.ListaHorarios.add("11:00");
+        this.ListaHorarios.add("14:00");
+        this.ListaHorarios.add("15:00");
+        this.ListaHorarios.add("16:00");
+        this.ListaHorarios.add("17:00");
     }
     
      public String inserirConsulta(Consulta co){
@@ -97,5 +108,12 @@ public class ControladorConsulta {
     public void setSelectedCons(Consulta selectedCons) {
         this.selectedCons = selectedCons;
     }
-    
+
+    public List<String> getListaHorarios() {
+        return ListaHorarios;
+    }
+
+    public void setListaHorarios(List<String> ListaHorarios) {
+        this.ListaHorarios = ListaHorarios;
+    }
 }

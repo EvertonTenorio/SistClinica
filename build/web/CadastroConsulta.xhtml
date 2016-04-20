@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Cadastro de Consulta</title>
         <script>
@@ -44,11 +45,18 @@ and open the template in the editor.
                         <p:messages/>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="inputData" value="Data da Consulta:" />
-                            <p:calendar id="inputData" value="#{cconsulta.data}" pattern=" dd/MM/yyyy" mode="inline" 
+                            <p:calendar id="inputData" value="#{cconsulta.data.date}" pattern=" dd/MM/yyyy" mode="inline" 
                                         disabledWeekends="true" locale="pt" mindate="0" 
-                                        required="true" requiredMessage="Selecione a Data e a Hora da Consulta"/>
+                                        required="true" requiredMessage="Selecione a Data da Consulta"/>
                             <p:message id="messageData" for="inputData"/>
-
+                            
+                            <p:outputLabel for="inputHora" value="Horario da Consulta:" />
+                            <p:selectOneMenu id="inputHora" value="#{cconsulta.data.hours}" required="true" requiredMessage="Selecione a Hora da Consulta">
+                                <f:selectItem itemLabel="Selecione o Horario" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{controleConsulta.listaHorarios}" />
+                            </p:selectOneMenu>
+                            <p:message id="messageHora" for="inputHora"/>
+                            
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>

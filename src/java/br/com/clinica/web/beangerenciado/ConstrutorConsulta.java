@@ -26,6 +26,10 @@ public class ConstrutorConsulta {
     private Medico Medico;
     private Date Data;
 
+    public ConstrutorConsulta(){
+        this.Data = new Date();
+    }
+            
     public Long getId() {
         return Id;
     }
@@ -41,8 +45,6 @@ public class ConstrutorConsulta {
     public void setPaciente(Paciente Paciente) {
         this.Paciente = Paciente;
     }
-
-   
 
     public Medico getMedico() {
         return Medico;

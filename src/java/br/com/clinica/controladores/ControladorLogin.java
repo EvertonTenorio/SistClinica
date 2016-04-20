@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Everton
  */
-@ManagedBean(name = "controleLoginFunc")
+@ManagedBean(name = "controleLogin")
 @SessionScoped
 public class ControladorLogin {
 
