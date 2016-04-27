@@ -7,6 +7,7 @@ package br.com.clinica.negocio;
 
 import java.io.Serializable;
 import java.util.Date;
+//import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -29,20 +33,20 @@ public class Consulta  implements Serializable{
     private Paciente Paciente;
     @ManyToOne
     private Medico Medico;
-    @Column(length = 10, nullable = false)
+    
     private Date Data;
 
     @Deprecated
     public Consulta() {
     }
 
-    public Consulta(Long Id, Paciente Paciente, Medico Medico, Date Data) {
-        this.Id=Id;
-        this.Paciente=Paciente;
+    public Consulta(Paciente Paciente, Medico Medico, Date Data) {
+        this.Paciente = Paciente;
         this.Medico = Medico;
         this.Data = Data;
     }
 
+    
     public Long getId() {
         return Id;
     }
@@ -73,5 +77,5 @@ public class Consulta  implements Serializable{
 
     public void setData(Date Data) {
         this.Data = Data;
-    }   
+    } 
 }

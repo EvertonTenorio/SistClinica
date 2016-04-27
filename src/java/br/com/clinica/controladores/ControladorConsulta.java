@@ -8,6 +8,7 @@ package br.com.clinica.controladores;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.repositorio.implementacoes.RepositorioConsultaImplDB;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;

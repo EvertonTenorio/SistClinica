@@ -45,13 +45,13 @@ and open the template in the editor.
                         <p:messages/>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="inputData" value="Data da Consulta:" />
-                            <p:calendar id="inputData" value="#{cconsulta.data.date}" pattern=" dd/MM/yyyy" mode="inline" 
+                            <p:calendar id="inputData" value="#{cconsulta.data}" pattern=" dd/MM/yyyy" mode="inline" 
                                         disabledWeekends="true" locale="pt" mindate="0" 
                                         required="true" requiredMessage="Selecione a Data da Consulta"/>
                             <p:message id="messageData" for="inputData"/>
                             
                             <p:outputLabel for="inputHora" value="Horario da Consulta:" />
-                            <p:selectOneMenu id="inputHora" value="#{cconsulta.data.hours}" required="true" requiredMessage="Selecione a Hora da Consulta">
+                            <p:selectOneMenu id="inputHora" value="#{cconsulta.horaString}" required="true" requiredMessage="Selecione a Hora da Consulta">
                                 <f:selectItem itemLabel="Selecione o Horario" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{controleConsulta.listaHorarios}" />
                             </p:selectOneMenu>

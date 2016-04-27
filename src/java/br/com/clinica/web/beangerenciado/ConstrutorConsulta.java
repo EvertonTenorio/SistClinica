@@ -9,9 +9,11 @@ package br.com.clinica.web.beangerenciado;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Medico;
 import br.com.clinica.negocio.Paciente;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -25,6 +27,7 @@ public class ConstrutorConsulta {
     private Paciente Paciente;
     private Medico Medico;
     private Date Data;
+    private Long hora;
 
     public ConstrutorConsulta(){
         this.Data = new Date();
@@ -61,8 +64,31 @@ public class ConstrutorConsulta {
     public void setData(Date Data) {
         this.Data = Data;
     }
+
+    public Long getHora() {
+        return hora;
+    }
+
+    public void setHora(Long hora) {
+        this.hora = hora;
+    }
+    
+    public void setHoraString(String hora){
+        this.hora = Long.parseLong(hora.split(":")[0]);
+        
+        /*SimpleDateFormat sdf = new SimpleDateFormat("hh");
+        sdf.format(Data);*/
+    }
+    
+    public String getHoraString(){
+        return this.hora+"";
+    }
+    
     
     public Consulta construirConsulta(){
-        return new Consulta(this.Id,this.Paciente, this.Medico, this.Data);
+        this.Data.setTime(this.Data.getTime()+3600000*hora);
+        
+        return new Consulta(this.Paciente, this.Medico, this.Data);
     }
 }
+
