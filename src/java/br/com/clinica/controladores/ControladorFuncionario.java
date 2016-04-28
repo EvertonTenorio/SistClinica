@@ -26,13 +26,19 @@ public class ControladorFuncionario {
     
     private RepositorioGenerico<Funcionario> repositorioFuncionario = null;
     private Funcionario selectedFunc;
+    private  String ConfirmaSenha;
     
     public ControladorFuncionario(){
         this.repositorioFuncionario = new RepositorioFuncionarioImplDB();
     }
     
     public String inserirFuncionario(Funcionario f){
-        
+        if(! f.getUsuario().getSenha().equals(ConfirmaSenha)){
+            FacesContext.getCurrentInstance().addMessage("form:inputSenha",new FacesMessage("problema",
+                                                            "Senha incorreta" ));
+                                                                
+            return null;
+        }
         if(!f.getGenero().toLowerCase().equals("m")&&!f.getGenero().toLowerCase().equals("f")){
             f.setGenero(f.getGenero().toUpperCase());
             FacesContext.getCurrentInstance().addMessage("form:inputGenero", new FacesMessage("problema",
@@ -92,5 +98,15 @@ public class ControladorFuncionario {
 
     public void setSelectedFunc(Funcionario selectedFunc) {
         this.selectedFunc = selectedFunc;
-    }   
+ 
+    }
+
+    public String getConfirmaSenha() {
+        return ConfirmaSenha;
+    }
+
+    public void setConfirmaSenha(String ConfirmaSenha) {
+        this.ConfirmaSenha = ConfirmaSenha;
+    }
+    
 }

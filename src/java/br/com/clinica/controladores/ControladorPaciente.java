@@ -26,12 +26,19 @@ public class ControladorPaciente {
     private RepositorioGenerico<Paciente> repositorioPaciente = null;
     private Paciente selectedPac;
     private ControladorLogin controleFunc;
+    private String ConfirmaSenha;
     
-    public ControladorPaciente(){
+    public  ControladorPaciente(){
         this.repositorioPaciente= new RepositorioPacienteImplDB();
     }
     
     public String inserircPaciente(Paciente c){
+        if(! c.getUsuario().getSenha().equals(ConfirmaSenha)){
+            FacesContext.getCurrentInstance().addMessage("form:inputSenha",new FacesMessage("problema",
+                                                            "Senha incorreta" ));
+                                                                
+            return null;
+        }
         if(!c.getGenero().toLowerCase().equals("m")&&!c.getGenero().toLowerCase().equals("f")){
             c.setGenero(c.getGenero().toUpperCase());
             FacesContext.getCurrentInstance().addMessage("form:inputGenero", new FacesMessage("problema",
@@ -106,6 +113,14 @@ public class ControladorPaciente {
 
     public void setControleFunc(ControladorLogin controleFunc) {
         this.controleFunc = controleFunc;
+    }
+
+    public String getConfirmaSenha() {
+        return ConfirmaSenha;
+    }
+
+    public void setConfirmaSenha(String ConfirmaSenha) {
+        this.ConfirmaSenha = ConfirmaSenha;
     }
 
    
