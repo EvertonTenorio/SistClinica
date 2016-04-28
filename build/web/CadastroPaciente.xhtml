@@ -79,12 +79,20 @@ and open the template in the editor.
                     <h:outputText value="Senha"/>
                     <p:password id="inputSenha" value="#{cpaciente.usuario.senha}" />
                     <p:message id="messageSenha" for="inputSenha"/>
+                    
+                    
                     <h:outputText/>
                     <h:outputText/>
                     <h:outputText/>
+                    
+                    <h:outputText value="Confirma Senha"/>
+                    <p:password id="inputConfirmaSenha" value="#{controlePaciente.confirmaSenha}" />
+                    <p:message id="messageConfirmaSenha" for="inputConfirmaSenha"/>
 
                     
-                   
+                      <h:outputText/>
+                    <h:outputText/>
+                    <h:outputText/>
 
                     <h:outputText value="Gênero" />
                     <p:selectOneRadio id="Gênero" value="#{cpaciente.genero}">
@@ -92,6 +100,7 @@ and open the template in the editor.
                         <f:selectItem itemLabel="Masculino" itemValue="M" />
 
                     </p:selectOneRadio>
+                    
 
                 </p:panelGrid>
                 </p:fieldset>

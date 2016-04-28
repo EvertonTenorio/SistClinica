@@ -77,7 +77,16 @@
                     <h:outputText/>
                     <h:outputText/>
                     <h:outputText/>
-
+                    
+                   
+                    
+                    <h:outputText value="Confirma Senha"/>
+                    <p:password id="inputConfirmaSenha" value="#{controleFuncionario.confirmaSenha}" />
+                    <p:message id="messageConfirmaSenha" for="inputConfirmaSenha"/>
+                       <h:outputText/>
+                    <h:outputText/>
+                    <h:outputText/>
+                    
                     <h:outputText value="Salário"/>
                     <p:inputText id="inputSalario" value="#{cfuncionario.salario}" required="true"
                                  requiredMessage="Digite o Salário"/>
