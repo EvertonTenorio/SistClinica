@@ -87,7 +87,17 @@ public class DaoManagerHiber {
     }
     
     public List recoverSQL(String sql){
-        Transaction tr = s.beginTransaction();
+        Transaction tr = null;
+        try{
+           
+            s = sessionFactory.openSession();
+            
+        }catch(org.hibernate.exception.JDBCConnectionException ex){
+            s.close();
+            s=sessionFactory.openSession();
+        }
+        
+        tr = s.beginTransaction();
         
         Query query = s.createSQLQuery(sql);
         

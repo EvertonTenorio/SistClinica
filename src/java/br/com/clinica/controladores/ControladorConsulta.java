@@ -6,10 +6,13 @@
 package br.com.clinica.controladores;
 
 import br.com.clinica.negocio.Consulta;
+import br.com.clinica.negocio.Medico;
 import br.com.clinica.repositorio.implementacoes.RepositorioConsultaImplDB;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,21 +26,13 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name="controleConsulta")
 @SessionScoped
 public class ControladorConsulta {
-    private RepositorioGenerico<Consulta> repositorioConsulta= null;
+    private RepositorioConsultaImplDB repositorioConsulta= null;
     private Consulta selectedCons;
     private List<String> ListaHorarios;
     
     public ControladorConsulta(){
         this.repositorioConsulta= new RepositorioConsultaImplDB();
         this.ListaHorarios = new ArrayList<>();
-        this.ListaHorarios.add("08:00");
-        this.ListaHorarios.add("09:00");
-        this.ListaHorarios.add("10:00");
-        this.ListaHorarios.add("11:00");
-        this.ListaHorarios.add("14:00");
-        this.ListaHorarios.add("15:00");
-        this.ListaHorarios.add("16:00");
-        this.ListaHorarios.add("17:00");
     }
     
      public String inserirConsulta(Consulta co){
@@ -94,11 +89,11 @@ public class ControladorConsulta {
         return this.repositorioConsulta.recuperarTodos();
     }
 
-    public RepositorioGenerico<Consulta> getRepositorioConsulta() {
+    public RepositorioConsultaImplDB getRepositorioConsulta() {
         return repositorioConsulta;
     }
 
-    public void setRepositorioConsulta(RepositorioGenerico<Consulta> repositorioConsulta) {
+    public void setRepositorioConsulta(RepositorioConsultaImplDB repositorioConsulta) {
         this.repositorioConsulta = repositorioConsulta;
     }
 

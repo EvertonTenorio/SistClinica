@@ -7,9 +7,13 @@ package br.com.clinica.repositorio.implementacoes;
 
 import br.com.clinica.dao.DaoManagerHiber;
 import br.com.clinica.negocio.Consulta;
+import br.com.clinica.negocio.Medico;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javafx.scene.chart.PieChart.Data;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -42,5 +46,7 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         return DaoManagerHiber.getInstance().recover("from Consulta");
     }
   
-    
+    public List<Consulta> recuperarConsultasMedico(Medico m, DateTime data){
+        return DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data = '"+data+"';");
+    }
 }
