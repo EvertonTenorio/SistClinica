@@ -76,12 +76,12 @@ and open the template in the editor.
 
                 <p:tab id="dataConsulta" title="Data Consulta">
                     <p:panel header="Selecione a Data e/ou a Hora da Consulta">
-                        <p:messages/>
+                        
                         <h:panelGrid columns="3">
                             <p:outputLabel for="inputData" value="Data da Consulta:" />      
-                            <p:calendar id="inputData" value="#{cconsulta.data}" pattern=" dd/MM/yyyy" mode="inline" 
+                            <p:calendar id="inputData" value="#{cconsulta.data}" mode="inline" 
                                         disabledWeekends="true" locale="pt" mindate="0"
-                                        required="true" requiredMessage="Selecione a Data da Consulta" >
+                                        required="true" requiredMessage="Selecione a Data da Consulta">
                                 <p:ajax event="dateSelect" update="inputHora"></p:ajax>
                             </p:calendar>
                             <p:message id="messageData" for="inputData"/>

@@ -46,7 +46,7 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         return DaoManagerHiber.getInstance().recover("from Consulta");
     }
   
-    public List<Consulta> recuperarConsultasMedico(Medico m, DateTime data){
+    public List<Consulta> recuperarConsultasMedico(Medico m, Calendar data){
         return DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data = '"+data+"';");
     }
 }

@@ -30,12 +30,12 @@ public class ConstrutorConsulta {
     private Long Id;
     private Paciente Paciente;
     private Medico Medico;
-    private DateTime Data;
+    private Calendar Data;
     private Long hora;
     private List<String> ListaHorarios;
 
     public ConstrutorConsulta(){
-        this.Data = new DateTime();
+        this.Data = Calendar.getInstance();
         this.ListaHorarios = new ArrayList<>();
     }
 
@@ -68,11 +68,11 @@ public class ConstrutorConsulta {
         
     }
 
-    public DateTime getData() {
+    public Calendar getData() {
         return Data;
     }
 
-    public void setData(DateTime Data) {
+    public void setData(Calendar Data) {
         this.Data = Data;
         this.horasDisponiveisConsultas(this.Data);
     }
@@ -96,7 +96,7 @@ public class ConstrutorConsulta {
         return this.hora+"";
     }
     
-    public void horasDisponiveisConsultas(DateTime data){
+    public void horasDisponiveisConsultas(Calendar data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
         
         for (int i = 0; i < consultas.size(); i++) {
@@ -115,28 +115,28 @@ public class ConstrutorConsulta {
         }
         
         for(Consulta c : consultas){
-            if(c.getData().getHourOfDay() != 8){
+            if(c.getData().getTime().getHours() != 8){
                 this.ListaHorarios.add("08:00");
             }
-            if(c.getData().getHourOfDay() != 9){
+            if(c.getData().getTime().getHours() != 9){
                 this.ListaHorarios.add("09:00");
             }
-            if(c.getData().getHourOfDay() != 10){
+            if(c.getData().getTime().getHours() != 10){
                 this.ListaHorarios.add("10:00");
             }
-            if(c.getData().getHourOfDay() != 11){
+            if(c.getData().getTime().getHours() != 11){
                 this.ListaHorarios.add("11:00");
             }
-            if(c.getData().getHourOfDay() != 14){
+            if(c.getData().getTime().getHours() != 14){
                 this.ListaHorarios.add("14:00");
             }
-            if(c.getData().getHourOfDay() != 15){
+            if(c.getData().getTime().getHours() != 15){
                 this.ListaHorarios.add("15:00");
             }
-            if(c.getData().getHourOfDay() != 16){
+            if(c.getData().getTime().getHours() != 16){
                 this.ListaHorarios.add("16:00");
             }
-            if(c.getData().getHourOfDay() != 17){
+            if(c.getData().getTime().getHours() != 17){
                 this.ListaHorarios.add("17:00");
             }
         }
@@ -144,7 +144,7 @@ public class ConstrutorConsulta {
     }
     
     public Consulta construirConsulta(){
-        this.Data.toDate().setTime(this.Data.getMillis() + 3600000 * hora);
+        this.Data.setTimeInMillis(this.Data.getTimeInMillis()+ 3600000 * hora);
         
         return new Consulta(this.Paciente, this.Medico, this.Data);
     }

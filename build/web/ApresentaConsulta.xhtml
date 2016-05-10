@@ -19,8 +19,8 @@
                          rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
                          selection="#{controleConsulta.selectedCons}">
 
-                <p:column sortBy="#{item.data}" filterBy="#{item.data}" headerText="Data e Hora" footerText="Data e Hora">
-                    <h:outputText value="#{item.data}"/>
+                <p:column sortBy="#{item.dataString}" filterBy="#{item.dataString}" headerText="Data e Hora" footerText="Data e Hora">
+                    <h:outputText value="#{item.dataString}"/>
                 </p:column>
 
                 <p:column sortBy="#{item.paciente.nome}" filterBy="#{item.paciente.nome}" headerText="Paciente/CPF" footerText="Paciente/CPF" >

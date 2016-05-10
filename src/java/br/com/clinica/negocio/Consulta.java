@@ -6,6 +6,7 @@
 package br.com.clinica.negocio;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
@@ -32,13 +33,13 @@ public class Consulta  implements Serializable{
     @ManyToOne
     private Medico Medico;
     
-    private DateTime Data;
+    private Calendar Data;
 
     @Deprecated
     public Consulta() {
     }
 
-    public Consulta(Paciente Paciente, Medico Medico, DateTime Data) {
+    public Consulta(Paciente Paciente, Medico Medico, Calendar Data) {
         this.Paciente = Paciente;
         this.Medico = Medico;
         this.Data = Data;
@@ -69,11 +70,16 @@ public class Consulta  implements Serializable{
         this.Medico = Medico;
     }
 
-    public DateTime getData() {
-        return Data;
+    public String getDataString() {
+        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return sdf.format(this.Data);
     }
 
-    public void setData(DateTime Data) {
+    public Calendar getData() {
+        return Data;
+    }
+    
+    public void setData(Calendar Data) {
         this.Data = Data;
     } 
 }
