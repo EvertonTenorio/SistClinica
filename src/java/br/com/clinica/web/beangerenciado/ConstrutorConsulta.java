@@ -87,9 +87,6 @@ public class ConstrutorConsulta {
     
     public void setHoraString(String hora){
         this.hora = Long.parseLong(hora.split(":")[0]);
-        
-        /*SimpleDateFormat sdf = new SimpleDateFormat("hh");
-        sdf.format(Data);*/
     }
     
     public String getHoraString(){
@@ -99,8 +96,8 @@ public class ConstrutorConsulta {
     public void horasDisponiveisConsultas(Calendar data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
         
-        for (int i = 0; i < consultas.size(); i++) {
-          consultas.remove(i);
+        for (int i = 0; i < ListaHorarios.size(); i++) {
+          ListaHorarios.remove(i);
         }
         
         if(consultas.isEmpty()){
@@ -139,14 +136,12 @@ public class ConstrutorConsulta {
             if(c.getData().getTime().getHours() != 17){
                 this.ListaHorarios.add("17:00");
             }
-        }
-            
+        }       
     }
     
     public Consulta construirConsulta(){
-        this.Data.setTimeInMillis(this.Data.getTimeInMillis()+ 3600000 * hora);
+        this.Data.setTimeInMillis(this.Data.getTimeInMillis() + 3600000 * hora);
         
         return new Consulta(this.Paciente, this.Medico, this.Data);
     }
 }
-

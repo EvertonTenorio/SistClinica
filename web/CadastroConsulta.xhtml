@@ -75,26 +75,25 @@ and open the template in the editor.
                 </p:tab>
 
                 <p:tab id="dataConsulta" title="Data Consulta">
-                    <p:panel header="Selecione a Data e/ou a Hora da Consulta">
-                        
+                    <p:panel header="Selecione a Data e a Hora da Consulta">
+                        <p:messages/>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="inputData" value="Data da Consulta:" />      
-                            <p:calendar id="inputData" value="#{cconsulta.data}" mode="inline" 
-                                        disabledWeekends="true" locale="pt" mindate="0"
-                                        required="true" requiredMessage="Selecione a Data da Consulta">
+                            <p:calendar id="inputData" value="#{cconsulta.data.time}" mode="inline" disabledWeekends="true"
+                                        locale="pt" mindate="0" required="true" requiredMessage="Selecione a Data da Consulta">
                                 <p:ajax event="dateSelect" update="inputHora"></p:ajax>
                             </p:calendar>
                             <p:message id="messageData" for="inputData"/>
                             
                             <p:outputLabel for="inputHora" value="Horario da Consulta:" />
-                            <p:selectOneMenu id="inputHora" value="#{cconsulta.horaString}" required="true" requiredMessage="Selecione a Hora da Consulta">
-                                <f:selectItem itemLabel="Selecione o Horario" noSelectionOption="true" />
-                                <f:selectItems value="#{cconsulta.listaHorarios}" />
+                            <p:selectOneMenu id="inputHora" value="#{cconsulta.horaString}" required="true" 
+                                             requiredMessage="Selecione a Hora da Consulta">
+                                <f:selectItem itemLabel="Selecione o Horario" noSelectionOption="true"/>
+                                <f:selectItems value="#{cconsulta.listaHorarios}"/>
                             </p:selectOneMenu>
                             <p:message id="messageHora" for="inputHora"/>
                             
-                        </h:panelGrid>
-                        
+                        </h:panelGrid>     
                     </p:panel>
                </p:tab>
                 
