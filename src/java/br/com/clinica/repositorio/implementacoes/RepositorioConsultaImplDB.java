@@ -9,6 +9,9 @@ import br.com.clinica.dao.DaoManagerHiber;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Medico;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +49,28 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         return DaoManagerHiber.getInstance().recover("from Consulta");
     }
   
-    public List<Consulta> recuperarConsultasMedico(Medico m, Calendar data){
-        return DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data = '"+data.getTime()+"';");
+    public List<Consulta> recuperarConsultasMedico(Medico m, Date data){
+        
+        List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ m.getId());
+       
+        /*
+        //Use LocalDate e LocalTime
+        LocalTime t = new LocalTime();
+        LocalDate d = new LocalDate();
+*/
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dayKey = sdf.format(data);
+        
+        for(Consulta c : consultas){
+            String d = sdf.format(c.getData());
+            if(!d.equals(dayKey)){
+                consultas.remove(c);
+            }
+        }
+            
+        return consultas;
+        
+        //return DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data = '"+data+"';");
     }
 }

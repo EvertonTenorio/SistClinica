@@ -30,12 +30,12 @@ public class ConstrutorConsulta {
     private Long Id;
     private Paciente Paciente;
     private Medico Medico;
-    private Calendar Data;
+    private Date Data;
     private Long hora;
     private List<String> ListaHorarios;
 
     public ConstrutorConsulta(){
-        this.Data = Calendar.getInstance();
+        this.Data = new Date();
         this.ListaHorarios = new ArrayList<>();
     }
 
@@ -68,11 +68,11 @@ public class ConstrutorConsulta {
         
     }
 
-    public Calendar getData() {
+    public Date getData() {
         return Data;
     }
 
-    public void setData(Calendar Data) {
+    public void setData(Date Data) {
         this.Data = Data;
         this.horasDisponiveisConsultas(this.Data);
     }
@@ -93,14 +93,15 @@ public class ConstrutorConsulta {
         return this.hora+"";
     }
     
-    public void horasDisponiveisConsultas(Calendar data){
+    public void horasDisponiveisConsultas(Date data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
         
-        for (int i = 0; i < ListaHorarios.size(); i++) {
-          ListaHorarios.remove(i);
-        }
+//        for (int i = 0; i < ListaHorarios.size(); i++) {
+//            ListaHorarios.remove(i);
+//        }
         
-        if(consultas.isEmpty()){
+        if(consultas == null || consultas.isEmpty()){
+            ListaHorarios.clear();
             this.ListaHorarios.add("08:00");
             this.ListaHorarios.add("09:00");
             this.ListaHorarios.add("10:00");
@@ -112,35 +113,36 @@ public class ConstrutorConsulta {
         }
         
         for(Consulta c : consultas){
-            if(c.getData().getTime().getHours() != 8){
+            String f = new SimpleDateFormat("hh").format(c.getData());
+            if(!f.equals("08")){
                 this.ListaHorarios.add("08:00");
             }
-            if(c.getData().getTime().getHours() != 9){
+            if(!f.equals("09")){
                 this.ListaHorarios.add("09:00");
             }
-            if(c.getData().getTime().getHours() != 10){
+            if(!f.equals("10")){
                 this.ListaHorarios.add("10:00");
             }
-            if(c.getData().getTime().getHours() != 11){
+            if(!f.equals("11")){
                 this.ListaHorarios.add("11:00");
             }
-            if(c.getData().getTime().getHours() != 14){
+            if(!f.equals("14")){
                 this.ListaHorarios.add("14:00");
             }
-            if(c.getData().getTime().getHours() != 15){
+            if(!f.equals("15")){
                 this.ListaHorarios.add("15:00");
             }
-            if(c.getData().getTime().getHours() != 16){
+            if(!f.equals("16")){
                 this.ListaHorarios.add("16:00");
             }
-            if(c.getData().getTime().getHours() != 17){
+            if(!f.equals("17")){
                 this.ListaHorarios.add("17:00");
             }
         }       
     }
     
     public Consulta construirConsulta(){
-        this.Data.setTimeInMillis(this.Data.getTimeInMillis() + 3600000 * hora);
+        this.Data.setTime(this.Data.getTime() + 3600000 * hora);
         
         return new Consulta(this.Paciente, this.Medico, this.Data);
     }
