@@ -32,10 +32,10 @@ public class ConstrutorConsulta {
     private Medico Medico;
     private Date Data;
     private Long hora;
-    private List<String> ListaHorarios;
+    private List<String> ListaHorarios = null;
 
     public ConstrutorConsulta(){
-        this.Data = new Date();
+        this.Data = null;
         this.ListaHorarios = new ArrayList<>();
     }
 
@@ -96,12 +96,9 @@ public class ConstrutorConsulta {
     public void horasDisponiveisConsultas(Date data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
         
-//        for (int i = 0; i < ListaHorarios.size(); i++) {
-//            ListaHorarios.remove(i);
-//        }
+        ListaHorarios.clear();
         
         if(consultas == null || consultas.isEmpty()){
-            ListaHorarios.clear();
             this.ListaHorarios.add("08:00");
             this.ListaHorarios.add("09:00");
             this.ListaHorarios.add("10:00");

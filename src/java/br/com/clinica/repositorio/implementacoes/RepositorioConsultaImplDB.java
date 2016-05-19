@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javafx.scene.chart.PieChart.Data;
 import org.joda.time.DateTime;
@@ -53,24 +54,31 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         
         List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ m.getId());
        
-        /*
-        //Use LocalDate e LocalTime
-        LocalTime t = new LocalTime();
-        LocalDate d = new LocalDate();
-*/
+        if(consultas==null)
+            return null;
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dayKey = sdf.format(data);
         
-        for(Consulta c : consultas){
+       
+        /*for(Consulta c : consultas){
             String d = sdf.format(c.getData());
             if(!d.equals(dayKey)){
                 consultas.remove(c);
             }
+        }*/
+        
+        for(Iterator<Consulta> c = consultas.iterator();c.hasNext();){
+            Consulta caux = c.next();
+            String d = sdf.format(caux.getData());
+            if(!d.equals(dayKey)){
+                c.remove();
+            }
         }
+        
             
         return consultas;
         
-        //return DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data = '"+data+"';");
+//      //  return (List<Consulta>) DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data in(select DATE('"+data.toLocaleString()+"') from consulta);");
     }
 }
