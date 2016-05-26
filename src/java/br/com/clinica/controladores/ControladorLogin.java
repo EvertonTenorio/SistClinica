@@ -54,13 +54,13 @@ public class ControladorLogin {
         
         if ((funcLogado == null) && (pacLogado == null)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Problema!", "O Usuario não existe!"));
-            return "index.xhtml";
+            return "/index.xhtml";
         } else if((funcLogado != null) && (pacLogado == null)) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Funcionário logado com sucesso!"));
-            return "indexMenu.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Funcionário "+funcLogado.getNome() +" logado com sucesso!"));
+            return "/indexMenu.xhtml";
         }else if((pacLogado != null) && (funcLogado == null)){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Paciente logado com sucesso!"));
-            return "menuPaciente.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Paciente "+ pacLogado.getNome()+" logado com sucesso!"));
+            return "/menuPaciente.xhtml";
         }else{
             return null;
         }
@@ -81,7 +81,12 @@ public class ControladorLogin {
             pacLogado = p;
         }
     }
-            
+    
+    public void sair(){
+        this.funcLogado = null;
+        this.pacLogado = null;
+    }
+    
     public Funcionario getFuncLogado() {
         return funcLogado;
     }

@@ -69,7 +69,7 @@ public class Consulta  implements Serializable{
     }
 
     public String getDataString() {
-        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return sdf.format(this.Data);
     }
 

@@ -40,9 +40,9 @@
                     <p:menuitem value="Cadastro" url="CadastroConsulta.xhtml"/>
                     <p:menuitem value="Apresentar" url="ApresentaConsulta.xhtml"/>
                 </p:submenu>
-                
-                
-                        <p:menuitem value="Sair" url="index.xhtml"/>                   
+                <p:submenu label="#{controleLogin.funcLogado.nome}" style="position: absolute; right: 0px">
+                    <p:menuitem action="#{controleLogin.sair()}" value="Sair" url="index.xhtml"/>
+                </p:submenu>                 
                 
             </p:menubar>
             <p:separator/>

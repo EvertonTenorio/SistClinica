@@ -28,7 +28,7 @@ and open the template in the editor.
                 </p:column>
                 
                 <p:column headerText="CPF" footerText="CPF">
-                    <h:outputText value="#{item.cpf}"/>
+                    <h:outputText value="#{item.cpfString}"/>
                 </p:column>
                 
                 <p:column headerText="Telefone Fixo" footerText="Telefone Fixo">
@@ -60,7 +60,7 @@ and open the template in the editor.
                     <h:outputText value="#{controlePaciente.selectedPac.nome}"/>
 
                     <h:outputText value="CPF"/>
-                    <h:outputText value="#{controlePaciente.selectedPac.cpf}"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.cpfString}"/>
 
                     <h:outputText value="RG"/>
                     <h:outputText value="#{controlePaciente.selectedPac.rg}"/>

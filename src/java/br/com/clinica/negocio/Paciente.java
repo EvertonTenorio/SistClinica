@@ -11,7 +11,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -78,8 +77,6 @@ public class Paciente implements Serializable {
         this.Nome = Nome;
     }
 
-  
-
     public Long getRg() {
         return Rg;
     }
@@ -94,9 +91,7 @@ public class Paciente implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }
-
-    
+    }   
 
     public String getGenero() {
         return Genero;
@@ -108,6 +103,20 @@ public class Paciente implements Serializable {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+    
+    public String getCpfString(){
+        String cpfRetorno = this.Cpf.toString();
+        
+        for(int i = 0; i < cpfRetorno.length(); i++){
+            if(i == 2 || i == 5){
+                cpfRetorno += ".";
+            }
+            if(i == 8){
+                cpfRetorno += "-";
+            }
+        }
+        return cpfRetorno;
     }
 
     public Long getCpf() {

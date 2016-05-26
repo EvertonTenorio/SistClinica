@@ -5,19 +5,21 @@
  */
 package br.com.clinica.web.beangerenciado;
 
-
+import br.com.clinica.controladores.ControladorLogin;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Medico;
 import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.implementacoes.RepositorioConsultaImplDB;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.joda.time.DateTime;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,18 +27,21 @@ import org.joda.time.DateTime;
  */
 @ManagedBean(name="cconsulta")
 @ViewScoped
-public class ConstrutorConsulta {
+public class ConstrutorConsulta implements Serializable{
     
     private Long Id;
     private Paciente Paciente;
     private Medico Medico;
     private Date Data;
     private Long hora;
+    private ControladorLogin controladorLogin;
     private List<String> ListaHorarios = null;
 
     public ConstrutorConsulta(){
-        this.Data = null;
+        this.Data = new Date();
         this.ListaHorarios = new ArrayList<>();
+        this.controladorLogin = (ControladorLogin)((HttpSession)FacesContext.getCurrentInstance().getExternalContext().
+                getSession(true)).getAttribute("controleLogin");
     }
 
     public List<String> getListaHorarios() {
@@ -96,50 +101,39 @@ public class ConstrutorConsulta {
     public void horasDisponiveisConsultas(Date data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
         
+//        for(Iterator<String> c = ListaHorarios.iterator();c.hasNext();c.next()){
+//            c.remove();
+//        }      
         ListaHorarios.clear();
         
-        if(consultas == null || consultas.isEmpty()){
-            this.ListaHorarios.add("08:00");
-            this.ListaHorarios.add("09:00");
-            this.ListaHorarios.add("10:00");
-            this.ListaHorarios.add("11:00");
-            this.ListaHorarios.add("14:00");
-            this.ListaHorarios.add("15:00");
-            this.ListaHorarios.add("16:00");
-            this.ListaHorarios.add("17:00");
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         
-        for(Consulta c : consultas){
-            String f = new SimpleDateFormat("hh").format(c.getData());
-            if(!f.equals("08")){
-                this.ListaHorarios.add("08:00");
+        this.ListaHorarios.add("08:00");
+        this.ListaHorarios.add("09:00");
+        this.ListaHorarios.add("10:00");
+        this.ListaHorarios.add("11:00");
+        this.ListaHorarios.add("14:00");
+        this.ListaHorarios.add("15:00");
+        this.ListaHorarios.add("16:00");
+        this.ListaHorarios.add("17:00");
+    
+        String horaConsulta;
+        for(int j = 0; j < ListaHorarios.size(); j++){
+            for(int i = 0; i < consultas.size(); i++){
+                horaConsulta = sdf.format(consultas.get(i).getData());
+                if(ListaHorarios.get(j).equals(horaConsulta)){
+                    ListaHorarios.remove(j);
+                    break;
+                }
             }
-            if(!f.equals("09")){
-                this.ListaHorarios.add("09:00");
-            }
-            if(!f.equals("10")){
-                this.ListaHorarios.add("10:00");
-            }
-            if(!f.equals("11")){
-                this.ListaHorarios.add("11:00");
-            }
-            if(!f.equals("14")){
-                this.ListaHorarios.add("14:00");
-            }
-            if(!f.equals("15")){
-                this.ListaHorarios.add("15:00");
-            }
-            if(!f.equals("16")){
-                this.ListaHorarios.add("16:00");
-            }
-            if(!f.equals("17")){
-                this.ListaHorarios.add("17:00");
-            }
-        }       
+        }        
     }
     
     public Consulta construirConsulta(){
         this.Data.setTime(this.Data.getTime() + 3600000 * hora);
+        
+        if(this.Paciente==null)
+            this.Paciente = controladorLogin.getPacLogado();
         
         return new Consulta(this.Paciente, this.Medico, this.Data);
     }

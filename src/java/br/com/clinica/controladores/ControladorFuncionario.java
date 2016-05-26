@@ -9,6 +9,9 @@ package br.com.clinica.controladores;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
 import br.com.clinica.repositorio.implementacoes.RepositorioFuncionarioImplDB;
 import br.com.clinica.negocio.Funcionario;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -105,8 +108,11 @@ public class ControladorFuncionario {
         return ConfirmaSenha;
     }
 
-    public void setConfirmaSenha(String ConfirmaSenha) {
-        this.ConfirmaSenha = ConfirmaSenha;
-    }
-    
+    public void setConfirmaSenha(String ConfirmaSenha) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+ 
+        BigInteger hash = new BigInteger(1, md.digest(ConfirmaSenha.getBytes()));
+ 
+        this.ConfirmaSenha = String.format("%32x", hash);
+    }  
 }

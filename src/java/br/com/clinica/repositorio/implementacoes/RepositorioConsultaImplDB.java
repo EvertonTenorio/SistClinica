@@ -52,12 +52,12 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
   
     public List<Consulta> recuperarConsultasMedico(Medico m, Date data){
         
-        List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ m.getId());
-       
+       List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ m.getId());
+     
         if(consultas==null)
-            return null;
+           return null;
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dayKey = sdf.format(data);
         
        
@@ -74,11 +74,10 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
             if(!d.equals(dayKey)){
                 c.remove();
             }
-        }
-        
+        }        
             
         return consultas;
-        
-//      //  return (List<Consulta>) DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and Data in(select DATE('"+data.toLocaleString()+"') from consulta);");
+       // String dataformatada = sdf.format(data);
+       // return (List<Consulta>) DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and CAST(Data as Date) = '"+dataformatada+"';");
     }
 }

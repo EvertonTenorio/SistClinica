@@ -6,6 +6,9 @@
 package br.com.clinica.negocio;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -43,7 +46,11 @@ public class Usuario implements Serializable{
         return Senha;
     }
 
-    public void setSenha(String Senha) {
-        this.Senha = Senha;
+    public void setSenha(String Senha) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+ 
+        BigInteger hash = new BigInteger(1, md.digest(Senha.getBytes()));
+ 
+        this.Senha = String.format("%32x", hash);
     }   
 }

@@ -30,6 +30,7 @@ public class ControladorConsulta {
     private Consulta selectedCons;
     private List<String> ListaHorarios;
     
+    
     public ControladorConsulta(){
         this.repositorioConsulta= new RepositorioConsultaImplDB();
         this.ListaHorarios = new ArrayList<>();
