@@ -12,7 +12,7 @@
           <h:form id="form">
             <p:messages/>
             <p:fieldset legend="Alterar Funcionário">
-                <p:panelGrid columns="3">
+                <p:panelGrid columns="6">
                     <h:outputText value="Nome"/>
                     <p:inputText id="inputNome" value="#{controleFuncionario.selectedFunc.nome}" required="true"
                                  requiredMessage="Digite o Nome"/>
@@ -64,12 +64,7 @@
                     <p:inputText id="inputLogin" value="#{controleFuncionario.selectedFunc.usuario.email}" required="true"
                                  requiredMessage="Digite o Login"/>
                     <p:message id="messageLogin" for="inputLogin"/>
-                    
-                    <h:outputText value="Senha"/>
-                    <p:inputText id="inputSenha" value="#{controleFuncionario.selectedFunc.usuario.senha}" required="true"
-                                 requiredMessage="Digite a Senha"/>
-                    <p:message id="messageSenha" for="inputSenha"/>
-                    
+                
                     <h:outputText value="Salário"/>
                     <p:inputText id="inputSalario" value="#{controleFuncionario.selectedFunc.salario}" required="true"
                                  requiredMessage="Digite o Salário"/>

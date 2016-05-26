@@ -8,36 +8,46 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Alterar Consulta</title>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <h:head>
+        <title>Alterar a Consulta</title>
+        <script>
+            PrimeFaces.locales['pt'] = {  
+                closeText: 'Fechar',  
+                prevText: 'Anterior',  
+                nextText: 'Próximo',     
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+                dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+                weekHeader: 'Semana',  
+                firstDay: 0,  
+                isRTL: false,  
+                showMonthAfterYear: false,  
+                ampm: false,  
+                month: 'Mês',  
+                week: 'Semana',  
+                day: 'Dia',  
+                allDayText : 'Todo Dia'  
+            };
+        </script>
+            
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
 
         <h:form id="form">
-              <p:wizard>
-                <p:tab id="dataConsulta" title="Data Consulta">
-                    <p:panel header="Selecione a Alteração da Data e/ou Hora da Consulta">
-                        <p:messages/>
-                        <h:panelGrid columns="3">
-                            <p:outputLabel for="inputData" value="Data e Hora da Consulta:" />
-                            <p:calendar id="inputData" value="#{controleConsulta.selectedCons.data}" pattern=" dd/MM/yyyy HH:mm:ss" 
-                                        required="true" requiredMessage="Selecione a Data e a Hora da Consulta"/>
-                            <p:message id="messageData" for="inputData"/>
-
-                        </h:panelGrid>
-                    </p:panel>
-                </p:tab>
-
-                <p:tab id="nomeCliente" title="Lista de Clientes">
-                    <p:panel header="Selecione o Cliente para a Consulta">
+            <p:wizard>
+                  <p:tab id="nomeCliente" title="Lista de Pacientes">
+                    <p:panel header="Selecione o paciente para a Consulta">
                         <p:messages/>
                         <h:panelGrid>
 
                             <p:dataTable id="tabelaPaciente" value="#{controlePaciente.pacientes}" var="item"
                                          rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single" 
-                                         selection="#{controleConsulta.selectedCons.paciente}">
+                                         selection="#{cconsulta.paciente}">
 
                                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
                                     <h:outputText value="#{item.id}"/>
@@ -51,11 +61,11 @@ and open the template in the editor.
                                     <h:outputText value="#{item.cpf}"/>
                                 </p:column>
 
-                            </p:dataTable>  
+                            </p:dataTable> 
+                           
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
-
                 <p:tab id="nomeMedico" title="Lista de Médicos">
                     <p:panel header="Selecione o Médico para a Consulta">
                         <p:messages/>
@@ -63,7 +73,7 @@ and open the template in the editor.
 
                             <p:dataTable id="tabelaMedico" value="#{controleMedico.medicos}" var="item"
                                          rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single" 
-                                         selection="#{controleConsulta.selectedCons.medico}">
+                                         selection="#{cconsulta.medico}">
 
                                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
                                     <h:outputText value="#{item.id}"/>
@@ -73,23 +83,48 @@ and open the template in the editor.
                                     <h:outputText value="#{item.nome}"/>
                                 </p:column>
 
-                                <p:column sortBy="#{item.NCertificadoRegionaleEstado}" filterBy="#{item.NCertificadoRegionaleEstado}" 
-                                          headerText="Certificado Regional" footerText="Certificado Regional">
-                                    <h:outputText value="#{item.NCertificadoRegionaleEstado}"/>
+                                <p:column sortBy="#{item.CRM}" filterBy="#{item.CRM}" 
+                                          headerText="CRM" footerText="CRM">
+                                    <h:outputText value="#{item.CRM}"/>
                                 </p:column>
 
                                 <p:column sortBy="#{item.nomeEspecialidade.nome}" filterBy="#{item.nomeEspecialidade.nome}" 
                                           headerText="Especialidade" footerText="Especialidade">
-                                    <h:outputText value="#{item.nomeEspecialidade.nome}"/>
+                                    <h:outputText value="#{item.nomeEspecialidade.nome}" />
                                 </p:column>
 
                             </p:dataTable>  
                         </h:panelGrid>
-                        <p:commandButton value="Alterar" action="#{controleConsulta.alterarConsulta(controleConsulta.selectedCons)}"
-                                         update="form" style="left:600px"/>
+                        
                     </p:panel>
                 </p:tab>
-                  
+
+                <p:tab id="dataConsulta" title="Data Consulta">
+                    <p:panel header="Selecione a Data e a Hora da Consulta">
+                        <p:messages/>
+                        <h:panelGrid columns="3">
+                            <p:outputLabel for="inputData" value="Data da Consulta:" />      
+                            <p:calendar id="inputData" value="#{cconsulta.data}" mode="inline" disabledWeekends="true"
+                                        locale="pt" mindate="0" required="true" requiredMessage="Selecione a Data da Consulta">
+                                <p:ajax event="dateSelect" update="inputHora"></p:ajax>
+                            </p:calendar>
+                            <p:message id="messageData" for="inputData"/>
+                            
+                            <p:outputLabel for="inputHora" value="Horario da Consulta:" />
+                            <p:selectOneMenu id="inputHora" value="#{cconsulta.horaString}" required="true" 
+                                             requiredMessage="Selecione a Hora da Consulta">
+                                <f:selectItem itemLabel="Selecione o Horario"/>
+                                <f:selectItems value="#{cconsulta.listaHorarios}"/>
+                            </p:selectOneMenu>
+                            <p:message id="messageHora" for="inputHora"/>
+                            
+                        </h:panelGrid>     
+                    </p:panel>
+                     <p:commandButton value="Cadastrar" action="#{controleConsulta.inserirConsulta(cconsulta.construirConsulta())}"
+                                         update="form" style="left:600px"/>
+               </p:tab>
+                
+              
             </p:wizard>
         </h:form>
     </h:body>
