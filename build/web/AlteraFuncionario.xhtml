@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
-          <h:form id="form">
+        <h:form id="form">
             <p:messages/>
             <p:fieldset legend="Alterar Funcionário">
                 <p:panelGrid columns="6">
@@ -18,71 +18,83 @@
                                  requiredMessage="Digite o Nome"/>
                     <p:message id="messageNome" for="inputNome" />
 
-                    <h:outputText value="CPF"/>
-                    <p:inputText id="inputCPF" value="#{controleFuncionario.selectedFunc.cpf}" required="true" 
-                                 requiredMessage="Digite o CPF"/>
-                    <p:message id="messageCPF" for="inputCPF"/>
-                    
-                     <h:outputText value="RG"/>
-                     <p:inputText id="inputRG" value="#{controleFuncionario.selectedFunc.rg}" required="true" 
-                                 requiredMessage="Digite o RG"/>
-                    <p:message id="messageRG" for="inputRG"/>
-
                     <h:outputText value="Cep"/>
                     <p:inputText id="inputCep" value="#{controleFuncionario.selectedFunc.endereco.cep}" required="true" requiredMessage="Digite o Cep"/>
                     <p:message id="messageCep" for="inputCep"/>
 
+                    <h:outputText value="CPF"/>
+                    <p:inputText id="inputCPF" value="#{controleFuncionario.selectedFunc.cpf}" required="true" 
+                                 requiredMessage="Digite o CPF"/>
+                    <p:message id="messageCPF" for="inputCPF"/>
                     <h:outputText value="Estado"/>
                     <p:inputText id="inputEstado" value="#{controleFuncionario.selectedFunc.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
                     <p:message id="messageEstado" for="inputEstado"/>
+                    <h:outputText value="RG"/>
+                    <p:inputText id="inputRG" value="#{controleFuncionario.selectedFunc.rg}" required="true" 
+                                 requiredMessage="Digite o RG"/>
+                    <p:message id="messageRG" for="inputRG"/>
 
                     <h:outputText value="Cidade"/>
                     <p:inputText id="inputCidade" value="#{controleFuncionario.selectedFunc.endereco.cidade}" required="true" requiredMessage="Digite o Cidade"/>
                     <p:message id="messageCidade" for="inputCidade"/>
 
+                    <h:outputText value="Telefone Fixo"/>
+                    <p:inputText value="#{controleFuncionario.selectedFunc.telefoneFixo}"/>
+                    <h:outputText/>
                     <h:outputText value="Bairro"/>
                     <p:inputText id="inputBairro" value="#{controleFuncionario.selectedFunc.endereco.bairro}" required="true" requiredMessage="Digite a Bairro"/>
                     <p:message id="messageBairro" for="inputBairro"/>
-
+                    <h:outputText value="Celular"/>
+                    <p:inputText value="#{controleFuncionario.selectedFunc.celular}"/>
+                    <h:outputText/>
                     <h:outputText value="Logradouro"/>
                     <p:inputText id="inputLogradouro" value="#{controleFuncionario.selectedFunc.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
                     <p:message id="messageLogradouro" for="inputLogradouro"/>
+
+                    <h:outputText value="Login"/>
+                    <p:inputText id="inputLogin" value="#{controleFuncionario.selectedFunc.usuario.email}" required="true"
+                                 requiredMessage="Digite o Login"/>
+                    <p:message id="messageLogin" for="inputLogin"/>
 
                     <h:outputText value="Numero"/>
                     <p:inputText id="inputNumero" value="#{controleFuncionario.selectedFunc.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
                     <p:message id="messageNumero" for="inputNumero"/>
 
-                    <h:outputText value="Telefone Fixo"/>
-                    <p:inputText value="#{controleFuncionario.selectedFunc.telefoneFixo}"/>
+                    <h:outputText value="Senha"/>
+                    <p:password id="inputSenha" value="#{controleFuncionario.selectedFunc.usuario.senha}" />
+                    <p:message id="messageSenha" for="inputSenha"/>
+                    <h:outputText/>
+                    <h:outputText/>
                     <h:outputText/>
 
-                    <h:outputText value="Celular"/>
-                    <p:inputText value="#{controleFuncionario.selectedFunc.celular}"/>
+                    <h:outputText value="Confirma Senha"/>
+                    <p:password id="inputConfirmaSenha" value="#{controleFuncionario.confirmaSenha}" />
+                    <p:message id="messageConfirmaSenha" for="inputConfirmaSenha"/>
                     <h:outputText/>
-                    
-                    <h:outputText value="Login"/>
-                    <p:inputText id="inputLogin" value="#{controleFuncionario.selectedFunc.usuario.email}" required="true"
-                                 requiredMessage="Digite o Login"/>
-                    <p:message id="messageLogin" for="inputLogin"/>
-                
+                    <h:outputText/>
+                    <h:outputText/>
+
                     <h:outputText value="Salário"/>
                     <p:inputText id="inputSalario" value="#{controleFuncionario.selectedFunc.salario}" required="true"
                                  requiredMessage="Digite o Salário"/>
                     <p:message id="messageSalario" for="inputSalario"/>
 
+                    <h:outputText/>
+                    <h:outputText/>
+                    <h:outputText/>
                     <h:outputText value="Gênero"/>
                     <p:inputText id="inputGenero" value="#{controleFuncionario.selectedFunc.genero}" maxlength="1"/>
                     <p:message id="messageGenero" for="inputGenero"/>
-  
-                    
-                    
-                </p:panelGrid>
-               <p:commandButton value="Alterar" action="#{controleFuncionario.alterarFuncionario(controleFuncionario.selectedFunc)}" 
-                                update="form"/>
-            </p:fieldset>
-            
 
-            
+
+
+                </p:panelGrid>
+                <p:commandButton value="Alterar" action="#{controleFuncionario.alterarFuncionario(controleFuncionario.selectedFunc)}" 
+                                 update="form"/>
+            </p:fieldset>
+
+
+
         </h:form>
     </h:body>
 </html>

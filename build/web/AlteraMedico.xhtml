@@ -21,52 +21,52 @@
                             <p:inputText id="inputNome" value="#{controleMedico.selectedMed.nome}" 
                                          required="true" requiredMessage="Digite o Nome"/>
                             <p:message id="messageNome" for="inputNome"/>
-
+                            
+                            <h:outputText value="Cep"/>
+                            <p:inputText id="inputCep" value="#{controleMedico.selectedMed.endereco.cep}" required="true" requiredMessage="Digite o Cep"/>
+                            <p:message id="messageCep" for="inputCep"/>
                             <h:outputText value="CPF"/>
                             <p:inputText id="inputCPF" value="#{controleMedico.selectedMed.cpf}" 
                                          required="true" requiredMessage="Digite o CPF"/>
                             <p:message id="messageCPF" for="inputCPF"/>
+                           
+                            <h:outputText value="Estado"/>
+                            <p:inputText id="inputEstado" value="#{controleMedico.selectedMed.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
+                            <p:message id="messageEstado" for="inputEstado"/>
 
                             <h:outputText value="RG"/>
                             <p:inputText id="inputRG" value="#{controleMedico.selectedMed.rg}"
                                          required="true" requiredMessage="Digite o RG"/>
                             <p:message id="messageRG" for="inputRG"/>
 
-                            <h:outputText value="Cep"/>
-                            <p:inputText id="inputCep" value="#{controleMedico.selectedMed.endereco.cep}" required="true" requiredMessage="Digite o Cep"/>
-                            <p:message id="messageCep" for="inputCep"/>
-                            
-                             <h:outputText value="Estado"/>
-                            <p:inputText id="inputEstado" value="#{controleMedico.selectedMed.endereco.estado}" required="true" requiredMessage="Digite o Estado"/>
-                            <p:message id="messageEstado" for="inputEstado"/>
-                             
                             <h:outputText value="Cidade"/>
                             <p:inputText id="inputCidade" value="#{controleMedico.selectedMed.endereco.cidade}" required="true" requiredMessage="Digite o Cidade"/>
                             <p:message id="messageCidade" for="inputCidade"/>
                             
+                              <h:outputText value="Telefone Fixo"/>
+                            <p:inputText id="inputTelefoneFixo" value="#{controleMedico.selectedMed.telefoneFixo}"/>
+                            <h:outputText/>
                             <h:outputText value="Bairro"/>
                             <p:inputText id="inputBairro" value="#{controleMedico.selectedMed.endereco.bairro}" required="true" requiredMessage="Digite a Bairro"/>
                             <p:message id="messageBairro" for="inputBairro"/>
                             
+                             <h:outputText value="Celular"/>
+                            <p:inputText id="inputCelular" value="#{controleMedico.selectedMed.celular}"/>
+                            <h:outputText/>
+                            
                             <h:outputText value="Logradouro"/>
                             <p:inputText id="inputLogradouro" value="#{controleMedico.selectedMed.endereco.logradouro}" required="true" requiredMessage="Digite o Logradouro"/>
                             <p:message id="messageLogradouro" for="inputLogradouro"/>
+                              <h:outputText value="Gênero"/>
+                            <p:inputText id="inputGenero" value="#{controleMedico.selectedMed.genero}"/>
+                            <h:outputText/>
                             
                             <h:outputText value="Numero"/>
                             <p:inputText id="inputNumero" value="#{controleMedico.selectedMed.endereco.numero}" required="true" requiredMessage="Digite o Número"/>
                             <p:message id="messageNumero" for="inputNumero"/>
 
-                            <h:outputText value="Telefone Fixo"/>
-                            <p:inputText id="inputTelefoneFixo" value="#{controleMedico.selectedMed.telefoneFixo}"/>
-                            <h:outputText/>
 
-                            <h:outputText value="Celular"/>
-                            <p:inputText id="inputCelular" value="#{controleMedico.selectedMed.celular}"/>
-                            <h:outputText/>
-
-                            <h:outputText value="Gênero"/>
-                            <p:inputText id="inputGenero" value="#{controleMedico.selectedMed.genero}"/>
-                            <h:outputText/>
+                          
                             
                             <h:outputText value="CRm "/>
                             <p:inputText id="inputNcr" value="#{controleMedico.selectedMed.CRM}"/>
