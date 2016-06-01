@@ -8,6 +8,9 @@ package br.com.clinica.controladores;
 import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.implementacoes.RepositorioLoginImplDB;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -48,7 +51,7 @@ public class ControladorLogin {
         repositorioLogin = new RepositorioLoginImplDB();
     }
 
-    public String realizarLogin(String login, String senha) {
+    public String realizarLogin(String login, String senha) throws NoSuchAlgorithmException {
         logarFuncionario(login, senha);
         logarPaciente(login, senha);
         
@@ -66,17 +69,17 @@ public class ControladorLogin {
         }
     }
     
-    public void logarFuncionario(String login, String senha){
+    public void logarFuncionario(String login, String senha) throws NoSuchAlgorithmException{
         Funcionario f = null;
-        f = repositorioLogin.buscarUsuarioFuncionario(login, senha);
+        f = repositorioLogin.buscarUsuarioFuncionario(login, converterSenhaMD5(senha));
         if(f != null){
             funcLogado = f;
         }
     }
     
-    public void logarPaciente(String login, String senha){
+    public void logarPaciente(String login, String senha) throws NoSuchAlgorithmException{
         Paciente p = null;
-        p = repositorioLogin.buscarUsuarioPaciente(login, senha);
+        p = repositorioLogin.buscarUsuarioPaciente(login, converterSenhaMD5(senha));
         if(p != null){
             pacLogado = p;
         }
@@ -101,5 +104,13 @@ public class ControladorLogin {
 
     public void setPacLogado(Paciente pacLogado) {
         this.pacLogado = pacLogado;
-    }   
+    }  
+    
+    public String converterSenhaMD5(String senha) throws NoSuchAlgorithmException{
+        MessageDigest md = MessageDigest.getInstance("MD5");
+ 
+        BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));
+ 
+        return String.format("%32x", hash);
+    }
 }
