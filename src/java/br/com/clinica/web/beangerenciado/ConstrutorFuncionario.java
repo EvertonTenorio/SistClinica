@@ -26,7 +26,6 @@ public class ConstrutorFuncionario {
     private Endereco endereco;
     private String TelefoneFixo;
     private String Celular;
-    private Double Salario;
     private String Genero;
     private Usuario usuario;
 
@@ -91,14 +90,6 @@ public class ConstrutorFuncionario {
         this.Celular = Celular;
     }
 
-    public Double getSalario() {
-        return Salario;
-    }
-
-    public void setSalario(Double Salario) {
-        this.Salario = Salario;
-    }
-
     public String getGenero() {
         return Genero;
     }
@@ -118,6 +109,6 @@ public class ConstrutorFuncionario {
     public Funcionario construirFuncionario() {
         return new Funcionario(this.Id, this.Nome, this.Cpf, this.Rg,
                 this.endereco, this.TelefoneFixo,
-                this.Celular, this.Salario, this.Genero, this.usuario);
+                this.Celular, this.Genero, this.usuario);
     }
 }

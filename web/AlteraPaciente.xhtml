@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Alterar Paciente</title>
     </h:head>
@@ -84,11 +85,12 @@
                   <h:outputText/>
                     <h:outputText/>
                     <h:outputText/>
-                    <h:outputText value="Gênero"/>
-                    <p:inputText id="inputGenero" value="#{controlePaciente.selectedPac.genero}" maxlength="1"/>
-                    <p:message id="messageGenero" for="inputGenero"/>   
-                    
-                    
+                      
+                     <h:outputText value="Gênero" />
+                    <p:selectOneRadio id="Gênero" value="#{controlePaciente.selectedPac.genero}">
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                      </p:selectOneRadio>
                 </p:panelGrid>
                 <p:commandButton value="Alterar" action="#{controlePaciente.alterarPaciente(controlePaciente.selectedPac)}" 
                                 update="form"/>

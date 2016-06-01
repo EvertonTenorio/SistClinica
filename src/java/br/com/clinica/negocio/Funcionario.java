@@ -35,8 +35,6 @@ public class Funcionario  implements Serializable{
     private String TelefoneFixo;
     @Column(length = 25)
     private String Celular;
-    @Column(length = 7)
-    private Double Salario;
     @Column(length = 15)
     private String Genero;
     @Embedded
@@ -51,7 +49,7 @@ public class Funcionario  implements Serializable{
     }
 
     public Funcionario(Long Id, String Nome, Long Cpf, Long Rg, Endereco endereco, String TelefoneFixo, String Celular,
-            Double Salario, String Genero, Usuario usuario) {
+             String Genero, Usuario usuario) {
 
         this.Id = Id;
         this.Nome = Nome;
@@ -60,7 +58,6 @@ public class Funcionario  implements Serializable{
         this.endereco = endereco;
         this.TelefoneFixo = TelefoneFixo;
         this.Celular = Celular;
-        this.Salario = Salario;
         this.Genero = Genero;
         this.usuario = usuario;
         
@@ -122,13 +119,7 @@ public class Funcionario  implements Serializable{
         this.Celular = Celular;
     }
 
-    public Double getSalario() {
-        return Salario;
-    }
-
-    public void setSalario(Double Salario) {
-        this.Salario = Salario;
-    }
+   
 
     public String getGenero() {
         return Genero;
