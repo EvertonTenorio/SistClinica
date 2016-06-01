@@ -8,16 +8,12 @@ package br.com.clinica.repositorio.implementacoes;
 import br.com.clinica.dao.DaoManagerHiber;
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Medico;
+import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import javafx.scene.chart.PieChart.Data;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -60,14 +56,6 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dayKey = sdf.format(data);
         
-       
-        /*for(Consulta c : consultas){
-            String d = sdf.format(c.getData());
-            if(!d.equals(dayKey)){
-                consultas.remove(c);
-            }
-        }*/
-        
         for(Iterator<Consulta> c = consultas.iterator();c.hasNext();){
             Consulta caux = c.next();
             String d = sdf.format(caux.getData());
@@ -79,5 +67,25 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         return consultas;
        // String dataformatada = sdf.format(data);
        // return (List<Consulta>) DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and CAST(Data as Date) = '"+dataformatada+"';");
+    }
+    
+    public List<Consulta> recuperarConsultasPaciente(Paciente p, Date data){
+        List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ p.getId());
+     
+        if(consultas==null)
+           return null;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dayKey = sdf.format(data);
+        
+        for(Iterator<Consulta> c = consultas.iterator();c.hasNext();){
+            Consulta caux = c.next();
+            String d = sdf.format(caux.getData());
+            if(!d.equals(dayKey)){
+                c.remove();
+            }
+        }        
+            
+        return consultas;
     }
 }

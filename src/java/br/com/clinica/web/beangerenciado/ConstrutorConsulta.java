@@ -100,13 +100,17 @@ public class ConstrutorConsulta implements Serializable{
     
     public void horasDisponiveisConsultas(Date data){
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedico(this.Medico, data);
+        List<Consulta> consultasPaciente = new RepositorioConsultaImplDB().recuperarConsultasPaciente(this.Paciente, data);
         
-//        for(Iterator<String> c = ListaHorarios.iterator();c.hasNext();c.next()){
-//            c.remove();
-//        }      
-        ListaHorarios.clear();
+        if(!consultasPaciente.isEmpty()){
+            for(int i = 0; i < consultasPaciente.size(); i++){
+                consultas.add(consultasPaciente.get(i));
+            }
+        }
         
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        
+        ListaHorarios.clear();
         
         this.ListaHorarios.add("08:00");
         this.ListaHorarios.add("09:00");
