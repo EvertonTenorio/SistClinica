@@ -8,6 +8,7 @@ package br.com.clinica.controladores;
 import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.implementacoes.RepositorioLoginImplDB;
+import br.com.clinica.web.beangerenciado.ConstrutorUsuario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +32,8 @@ public class ControladorLogin {
     private ControladorFuncionario controleFuncionario = null;
     private ControladorPaciente controlePaciente = null;
     private RepositorioLoginImplDB repositorioLogin = null;
+    private String Login;
+    private String Senha;
 
     public ControladorLogin() {
         HttpSession session = ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
@@ -51,9 +54,9 @@ public class ControladorLogin {
         repositorioLogin = new RepositorioLoginImplDB();
     }
 
-    public String realizarLogin(String login, String senha) throws NoSuchAlgorithmException {
-        logarFuncionario(login, senha);
-        logarPaciente(login, senha);
+    public String realizarLogin() throws NoSuchAlgorithmException {
+        logarFuncionario(this.Login, this.Senha);
+        logarPaciente(this.Login, this.Senha);
         
         if ((funcLogado == null) && (pacLogado == null)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Problema!", "O Usuario não existe!"));
@@ -86,8 +89,12 @@ public class ControladorLogin {
     }
     
     public void sair(){
-        this.funcLogado = null;
-        this.pacLogado = null;
+        this.Login = "";
+        this.Senha = "";
+//       ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("controleLogin");
+        FacesContext fc = FacesContext.getCurrentInstance();  
+	HttpSession session = (HttpSession)fc.getExternalContext().getSession(true);  
+	session.removeAttribute("controleLogin");
     }
     
     public Funcionario getFuncLogado() {
@@ -105,6 +112,24 @@ public class ControladorLogin {
     public void setPacLogado(Paciente pacLogado) {
         this.pacLogado = pacLogado;
     }  
+
+    public String getLogin() {
+        return Login;
+    }
+
+    public void setLogin(String Login) {
+        this.Login = Login;
+    }
+
+    public String getSenha() {
+        return Senha;
+    }
+
+    public void setSenha(String Senha) {
+        this.Senha = Senha;
+    }
+    
+    
     
     public String converterSenhaMD5(String senha) throws NoSuchAlgorithmException{
         MessageDigest md = MessageDigest.getInstance("MD5");
