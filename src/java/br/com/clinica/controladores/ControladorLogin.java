@@ -91,10 +91,13 @@ public class ControladorLogin {
     public void sair(){
         this.Login = "";
         this.Senha = "";
+        this.funcLogado = null;
+        this.pacLogado = null;
 //       ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("controleLogin");
-        FacesContext fc = FacesContext.getCurrentInstance();  
-	HttpSession session = (HttpSession)fc.getExternalContext().getSession(true);  
-	session.removeAttribute("controleLogin");
+        FacesContext context = FacesContext.getCurrentInstance(); 
+        context.getExternalContext().getSessionMap().remove("controleLogin");
+        HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        session.invalidate();
     }
     
     public Funcionario getFuncLogado() {
