@@ -122,9 +122,15 @@ public class ConstrutorConsulta implements Serializable{
         this.ListaHorarios.add("17:00");
     
         String horaConsulta;
+        String horaSistema;
         for(int j = 0; j < ListaHorarios.size(); j++){
             for(int i = 0; i < consultas.size(); i++){
                 horaConsulta = sdf.format(consultas.get(i).getData());
+                  horaSistema=sdf.format(new Date());
+               
+               if( ListaHorarios.get(j) < horaSistema){
+                        ListaHorarios.remove(j);
+                    }
                 if(ListaHorarios.get(j).equals(horaConsulta)){
                     ListaHorarios.remove(j);
                     break;
