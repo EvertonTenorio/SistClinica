@@ -17,13 +17,13 @@
                           visible="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="login" value="Login:" />
-                        <p:inputText id="login" value="#{controleLogin.login}" required="true" label="login" />
+                        <p:inputText id="login" value="#{cusuario.email}" required="true" label="login" />
 
                         <h:outputLabel for="senha" value="Senha:" />
-                        <p:password id="senha" value="#{controleLogin.senha}" required="true" label="senha" />
+                        <p:password id="senha" value="#{cusuario.senha}" required="true" label="senha" />
 
                         <f:facet name="footer">
-                            <p:commandButton value="Entrar" action="#{controleLogin.realizarLogin()}"
+                            <p:commandButton value="Entrar" action="#{controleLogin.realizarLogin(cusuario.construirUsuario())}"
                                              update="form1"/>
                         </f:facet>  
                     </h:panelGrid>

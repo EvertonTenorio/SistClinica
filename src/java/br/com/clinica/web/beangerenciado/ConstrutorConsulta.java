@@ -109,6 +109,7 @@ public class ConstrutorConsulta implements Serializable{
         }
         
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/YYYY");
         
         ListaHorarios.clear();
         
@@ -121,18 +122,30 @@ public class ConstrutorConsulta implements Serializable{
         this.ListaHorarios.add("16:00");
         this.ListaHorarios.add("17:00");
     
+        int horaAtual = Integer.parseInt(sdf.format(new Date()).split(":")[0]);
+        String dataAtual = sdf2.format(new Date());
+        
         String horaConsulta;
-        String horaSistema;
+        boolean removeuHora = false;
+        
         for(int j = 0; j < ListaHorarios.size(); j++){
-            for(int i = 0; i < consultas.size(); i++){
+            int horaDisponivel = Integer.parseInt(ListaHorarios.get(j).split(":")[0]);
+          
+            if(horaDisponivel < horaAtual && dataAtual.equals(sdf2.format(data))){
+                ListaHorarios.remove(j);
+                removeuHora = true;
+                j--;
+            }
+            for(int i = 0; i < consultas.size(); i++){                     
                 horaConsulta = sdf.format(consultas.get(i).getData());
-                  horaSistema=sdf.format(new Date());
-               
-               if( ListaHorarios.get(j) < horaSistema){
-                        ListaHorarios.remove(j);
-                    }
+                
+                if(removeuHora == true){
+                    break;
+                }
+       
                 if(ListaHorarios.get(j).equals(horaConsulta)){
                     ListaHorarios.remove(j);
+                    removeuHora = false;
                     break;
                 }
             }

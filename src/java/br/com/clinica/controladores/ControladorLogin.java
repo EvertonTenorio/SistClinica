@@ -7,12 +7,14 @@ package br.com.clinica.controladores;
 
 import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
+import br.com.clinica.negocio.Usuario;
 import br.com.clinica.repositorio.implementacoes.RepositorioLoginImplDB;
 import br.com.clinica.web.beangerenciado.ConstrutorUsuario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -32,8 +34,6 @@ public class ControladorLogin {
     private ControladorFuncionario controleFuncionario = null;
     private ControladorPaciente controlePaciente = null;
     private RepositorioLoginImplDB repositorioLogin = null;
-    private String Login;
-    private String Senha;
 
     public ControladorLogin() {
         HttpSession session = ((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
@@ -54,9 +54,9 @@ public class ControladorLogin {
         repositorioLogin = new RepositorioLoginImplDB();
     }
 
-    public String realizarLogin() throws NoSuchAlgorithmException {
-        logarFuncionario(this.Login, this.Senha);
-        logarPaciente(this.Login, this.Senha);
+    public String realizarLogin(Usuario usuario) throws NoSuchAlgorithmException {
+        logarFuncionario(usuario.getEmail(), usuario.getSenha());
+        logarPaciente(usuario.getEmail(), usuario.getSenha());
         
         if ((funcLogado == null) && (pacLogado == null)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Problema!", "O Usuario não existe!"));
@@ -76,6 +76,9 @@ public class ControladorLogin {
         Funcionario f = null;
         f = repositorioLogin.buscarUsuarioFuncionario(login, converterSenhaMD5(senha));
         if(f != null){
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+            session.setAttribute("usuario", f);
             funcLogado = f;
         }
     }
@@ -84,20 +87,22 @@ public class ControladorLogin {
         Paciente p = null;
         p = repositorioLogin.buscarUsuarioPaciente(login, converterSenhaMD5(senha));
         if(p != null){
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+            session.setAttribute("usuario", p);
             pacLogado = p;
         }
     }
     
     public void sair(){
-        this.Login = "";
-        this.Senha = "";
         this.funcLogado = null;
         this.pacLogado = null;
-//       ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("controleLogin");
+//        ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("usuario");
         FacesContext context = FacesContext.getCurrentInstance(); 
-        context.getExternalContext().getSessionMap().remove("controleLogin");
-        HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.invalidate();
+        context.getExternalContext().getSessionMap().remove("#{controleLogin}");
+        HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
+        					  .getExternalContext().getSession(false);
+        		    session.invalidate();
     }
     
     public Funcionario getFuncLogado() {
@@ -116,24 +121,6 @@ public class ControladorLogin {
         this.pacLogado = pacLogado;
     }  
 
-    public String getLogin() {
-        return Login;
-    }
-
-    public void setLogin(String Login) {
-        this.Login = Login;
-    }
-
-    public String getSenha() {
-        return Senha;
-    }
-
-    public void setSenha(String Senha) {
-        this.Senha = Senha;
-    }
-    
-    
-    
     public String converterSenhaMD5(String senha) throws NoSuchAlgorithmException{
         MessageDigest md = MessageDigest.getInstance("MD5");
  
