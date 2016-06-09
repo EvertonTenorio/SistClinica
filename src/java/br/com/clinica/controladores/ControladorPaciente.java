@@ -6,12 +6,17 @@
 package br.com.clinica.controladores;
 
 
+import br.com.clinica.dao.DaoManagerHiber;
+import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.implementacoes.RepositorioPacienteImplDB;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -129,4 +134,24 @@ public class ControladorPaciente {
  
         this.ConfirmaSenha = String.format("%32x", hash);
     }   
+    public List<Consulta> recuperarConsultasPaciente(Paciente p){
+        List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Paciente_Id = "+ p.getId());
+     
+        if(consultas==null)
+           return null;
+        Date data = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dayKey = sdf.format(data);
+        
+        for(Iterator<Consulta> c = consultas.iterator();c.hasNext();){
+            Consulta caux = c.next();
+            String d = sdf.format(caux.getData());
+            if(!d.equals(dayKey)){
+                c.remove();
+            }
+        }        
+            
+        return consultas;
+    }
 }
+

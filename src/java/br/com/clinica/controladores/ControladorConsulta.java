@@ -7,6 +7,7 @@ package br.com.clinica.controladores;
 
 import br.com.clinica.negocio.Consulta;
 import br.com.clinica.negocio.Medico;
+import br.com.clinica.negocio.Paciente;
 import br.com.clinica.repositorio.implementacoes.RepositorioConsultaImplDB;
 import br.com.clinica.repositorio.interfaces.RepositorioGenerico;
 import java.text.SimpleDateFormat;
@@ -76,6 +77,9 @@ public class ControladorConsulta {
         
         return "ApresentaConsultaFuncionario.xhtml";
        
+    }
+    public List<Consulta> recuperarConsultaPac(Paciente p){
+      return repositorioConsulta.recuperarConsultasPaciente(p, new Date());
     }
     
     public Consulta recuperaConsulta(Long codigo){

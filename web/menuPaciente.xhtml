@@ -19,7 +19,7 @@
             <p:growl id="gro" showDetail="true" life="3000" sticky="false"/>
             
             <p:menubar>
-                <p:menuitem value="Home" url="menuPaciente.xhtml"/>
+                <p:menuitem value="Home" url="indexPaciente.xhtml"/>
                 <p:submenu label="Paciente">
                     <p:menuitem value="Apresentar" url="ApresentaPaciente.xhtml"/>
                 </p:submenu>
@@ -27,6 +27,7 @@
                 <p:submenu label="Consulta">
                     <p:menuitem value="Cadastro" url="CadastroConsultaPaciente.xhtml"/>
                 </p:submenu> 
+                
                 <p:submenu label="#{controleLogin.pacLogado.nome}" style="position: absolute; right: 0px">
                     <p:menuitem action="#{controleLogin.sair()}" value="Sair" url="index.xhtml"/>
                 </p:submenu>                 
