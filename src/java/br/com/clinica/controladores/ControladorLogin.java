@@ -66,7 +66,7 @@ public class ControladorLogin {
             return "/indexMenu.xhtml";
         }else if((pacLogado != null) && (funcLogado == null)){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Paciente "+ pacLogado.getNome()+" logado com sucesso!"));
-            return "/indexPaciente.xhtml";
+            return "/indexPaciente2.xhtml";
         }else{
             return null;
         }
