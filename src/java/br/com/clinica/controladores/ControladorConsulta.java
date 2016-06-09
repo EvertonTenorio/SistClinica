@@ -79,7 +79,7 @@ public class ControladorConsulta {
        
     }
     public List<Consulta> recuperarConsultaPac(Paciente p){
-      return repositorioConsulta.recuperarConsultasPaciente(p, new Date());
+      return repositorioConsulta.recuperarConsultasPaciente(p);
     }
     
     public Consulta recuperaConsulta(Long codigo){

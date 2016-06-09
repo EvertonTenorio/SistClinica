@@ -66,7 +66,7 @@ public class ControladorLogin {
             return "/indexMenu.xhtml";
         }else if((pacLogado != null) && (funcLogado == null)){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Paciente "+ pacLogado.getNome()+" logado com sucesso!"));
-            return "/indexPaciente2.xhtml";
+            return "/indexPaciente.xhtml";
         }else{
             return null;
         }
@@ -80,6 +80,8 @@ public class ControladorLogin {
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
             session.setAttribute("usuario", f);
             funcLogado = f;
+        }else{
+            funcLogado = null;
         }
     }
     
@@ -91,18 +93,15 @@ public class ControladorLogin {
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
             session.setAttribute("usuario", p);
             pacLogado = p;
+        }else{
+            pacLogado = null;
         }
     }
     
     public void sair(){
         this.funcLogado = null;
         this.pacLogado = null;
-//        ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("usuario");
-        FacesContext context = FacesContext.getCurrentInstance(); 
-        context.getExternalContext().getSessionMap().remove("#{controleLogin}");
-        HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
-        					  .getExternalContext().getSession(false);
-        		    session.invalidate();
+        ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("usuario");
     }
     
     public Funcionario getFuncLogado() {

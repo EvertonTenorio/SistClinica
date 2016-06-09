@@ -8,7 +8,6 @@ package br.com.clinica.web.beangerenciado;
 import br.com.clinica.negocio.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
 /**
  *

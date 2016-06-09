@@ -46,7 +46,7 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         return DaoManagerHiber.getInstance().recover("from Consulta");
     }
   
-    public List<Consulta> recuperarConsultasMedico(Medico m, Date data){
+    public List<Consulta> recuperarConsultasMedicoPorData(Medico m, Date data){
         
        List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Medico_Id = "+ m.getId());
      
@@ -69,7 +69,7 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
        // return (List<Consulta>) DaoManagerHiber.getInstance().recoverSQL("select * from consulta where Medico_Id = "+ m.getId() +" and CAST(Data as Date) = '"+dataformatada+"';");
     }
     
-    public List<Consulta> recuperarConsultasPaciente(Paciente p, Date data){
+    public List<Consulta> recuperarConsultasPacientePorData(Paciente p, Date data){
         List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta where Paciente_Id = "+ p.getId());
      
         if(consultas==null)
@@ -87,5 +87,9 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
         }        
             
         return consultas;
+    }
+    
+    public List<Consulta> recuperarConsultasPaciente(Paciente p){
+        return (List<Consulta>) DaoManagerHiber.getInstance().recover("from Consulta where Paciente_id = " + p.getId());
     }
 }
