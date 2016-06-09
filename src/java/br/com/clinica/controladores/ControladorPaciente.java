@@ -50,8 +50,7 @@ public class ControladorPaciente {
         if(!c.getGenero().toLowerCase().equals("m")&&!c.getGenero().toLowerCase().equals("f")){
             c.setGenero(c.getGenero().toUpperCase());
             FacesContext.getCurrentInstance().addMessage("form:inputGenero", new FacesMessage("problema",
-                                                            "O gênero só pode ser"
-                                                                 + " M ou F"));
+                                                            "Selecione o gênero M ou F"));
            return null;
         }
         
@@ -71,8 +70,7 @@ public class ControladorPaciente {
         if(!c.getGenero().toLowerCase().equals("m")&&!c.getGenero().toLowerCase().equals("f")){
             c.setGenero(c.getGenero().toUpperCase());
             FacesContext.getCurrentInstance().addMessage("form:inputGenero", 
-                                            new FacesMessage("problema", "O gênero só pode ser"
-                                                                            + " M ou F"));
+                                            new FacesMessage("problema", "Selecione o gênero M ou F"));
            return null;
         }
          

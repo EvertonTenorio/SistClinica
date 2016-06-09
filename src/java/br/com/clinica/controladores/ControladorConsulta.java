@@ -30,11 +30,12 @@ public class ControladorConsulta {
     private RepositorioConsultaImplDB repositorioConsulta= null;
     private Consulta selectedCons;
     private List<String> ListaHorarios;
-    
+    private ControladorLogin controleLogin;
     
     public ControladorConsulta(){
         this.repositorioConsulta= new RepositorioConsultaImplDB();
         this.ListaHorarios = new ArrayList<>();
+        this.controleLogin = new ControladorLogin();
     }
     
      public String inserirConsulta(Consulta co){
@@ -43,8 +44,11 @@ public class ControladorConsulta {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage("parabéns", "A Consulta foi cadastrada com sucesso!"));
         
-        
-        return "ApresentaConsulta.xhtml";
+        if(controleLogin.getPacLogado() == null){
+            return "ApresentaConsulta.xhtml";
+        }else{
+            return "indexPaciente.xhtml";
+        }   
     }
     
      public String inserirConsultaFunc(Consulta co){

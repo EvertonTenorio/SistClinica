@@ -99,9 +99,14 @@ public class ConstrutorConsulta implements Serializable{
     }
     
     public void horasDisponiveisConsultas(Date data){
+        List<Consulta> consultasPaciente;
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedicoPorData(this.Medico, data);
-        List<Consulta> consultasPaciente = new RepositorioConsultaImplDB().recuperarConsultasPacientePorData(this.Paciente, data);
-        
+        if(controladorLogin.getPacLogado() == null){
+            consultasPaciente = new RepositorioConsultaImplDB().recuperarConsultasPacientePorData(this.Paciente, data);
+        }else{
+            consultasPaciente = new RepositorioConsultaImplDB().recuperarConsultasPacientePorData(controladorLogin.getPacLogado(), data);
+        }
+     
         if(!consultasPaciente.isEmpty()){
             for(int i = 0; i < consultasPaciente.size(); i++){
                 consultas.add(consultasPaciente.get(i));
