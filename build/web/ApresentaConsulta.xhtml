@@ -34,11 +34,9 @@
             </p:dataTable>
             <p:commandButton value="Visualizar dados da Consulta" 
                              update="dial1" oncomplete="PF('painel1').show()"/>
-            <p:commandButton value="Alterar" 
-                             oncomplete="location.href='AlteraConsulta.xhtml'"/>
-            <p:commandButton value="Excluir" actionListener="#{controleConsulta.deletarConsulta(controleConsulta.selectedCons)}" 
+            <p:commandButton value="Desmarcar" actionListener="#{controleConsulta.deletarConsulta(controleConsulta.selectedCons)}" 
                              update="tabelaConsulta">
-                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esta Consulta?" icon="ui-icon-alert" />
+                <p:confirm header="ATENÇÃO" message="Realmente deseja desmarcar esta Consulta?" icon="ui-icon-alert" />
             </p:commandButton>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

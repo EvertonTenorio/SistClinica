@@ -10,6 +10,64 @@
     <h:body>
          <p:growl id="gro" showDetail="true" life="3000" sticky="false"/>
         <ui:include src="menu.xhtml"/>
+        <h:form>
+            <p:fieldset legend="Consultas Marcadas">
+                
+        
+                <p:dataTable id="tabelaConsulta" value="#{controleConsulta.recuperarConsultasDoDia()}" var="item"
+                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
+                         selection="#{controleConsulta.selectedCons}">
+
+                <p:column sortBy="#{item.dataString}" filterBy="#{item.dataString}" headerText="Data e Hora" footerText="Data e Hora">
+                    <h:outputText value="#{item.dataString}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.paciente.nome}" filterBy="#{item.paciente.nome}" headerText="Paciente/CPF" footerText="Paciente/CPF" >
+                    <h:outputText value="#{item.paciente.nome}/#{item.paciente.cpf}"/>
+                </p:column>
+                
+                <p:column sortBy="#{item.medico.nome}" filterBy="#{item.medico.nome}" headerText="Medico" footerText="Medico" >
+                    <h:outputText value="#{item.medico.nome}/#{item.medico.nomeEspecialidade.nome}"/>
+                </p:column>
+                
+            </p:dataTable>
+            <p:commandButton value="Visualizar dados da Consulta" 
+                             update="dial1" oncomplete="PF('painel1').show()"/>
+            <p:commandButton value="Desmarcar" actionListener="#{controleConsulta.deletarConsulta(controleConsulta.selectedCons)}" 
+                             update="tabelaConsulta">
+                <p:confirm header="ATENÇÃO" message="Realmente deseja desmarcar esta Consulta?" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:dialog id="dial1" closable="false" resizable="false" modal="true"
+                      visible="false" widgetVar="painel1" header="Dados da Especialidade">
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Identificador"/>
+                    <h:outputText value="#{controleConsulta.selectedCons.id}"/>
+
+                    <h:outputText value="Data e Hora"/>
+                    <h:outputText value="#{controleConsulta.selectedCons.dataString}"/>
+                    
+                    <h:outputText value="Paciente/CPF"/>
+                    <h:outputText value="#{controleConsulta.selectedCons.paciente.nome}/#{controleConsulta.selectedCons.paciente.cpf}"/>
+                    
+                    <h:outputText value="Médico/Especialidade"/>
+                    <h:outputText value="#{controleConsulta.selectedCons.medico.nome}/#{controleConsulta.selectedCons.medico.nomeEspecialidade.nome}"/>
+                
+                </p:panelGrid>
+
+                <p:commandLink value="fechar" 
+                               oncomplete="PF('painel1').hide()"/>
+
+            </p:dialog>
+            </p:fieldset>
+            
+        </h:form>
     </h:body>
 </html>
 

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Apresenta Dados Paciente</title>
+    </h:head>
+    <h:body>
+        <ui:include src="menuPaciente.xhtml"/>
+
+        <h:form id="formPac">
+            <p:panelGrid columns="2">
+                <h:outputText value="Nome"/>
+                <h:outputText value="#{controleLogin.pacLogado.nome}"/>
+
+                <h:outputText value="CPF"/>
+                <h:outputText value="#{controleLogin.pacLogado.cpf}"/>
+
+                <h:outputText value="RG"/>
+                <h:outputText value="#{controleLogin.pacLogado.rg}"/>
+
+                <h:outputText value="Celular"/>
+                <h:outputText value="#{controleLogin.pacLogado.celular}"/>
+
+                <h:outputText value="Telefone Fixo"/>
+                <h:outputText value="#{controleLogin.pacLogado.telefoneFixo}"/>
+
+                <h:outputText value="Gênero"/>
+                <h:outputText value="#{controleLogin.pacLogado.genero}"/>
+               
+                <h:outputText value="Cep"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.cep}"/>
+
+                <h:outputText value="Estado"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.estado}"/>
+
+                <h:outputText value="Cidade"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.cidade}"/>
+
+                <h:outputText value="Bairro"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.bairro}"/>
+
+                <h:outputText value="Logradouro"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.logradouro}"/>
+
+                <h:outputText value="Número"/>
+                <h:outputText value="#{controleLogin.pacLogado.endereco.numero}"/>
+
+                <h:outputText value="Login"/>
+                <h:outputText value="#{controleLogin.pacLogado.usuario.email}"/>
+
+            </p:panelGrid>
+
+
+        </h:form>
+    </h:body>
+</html>
+

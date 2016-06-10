@@ -89,6 +89,9 @@ public class ControladorConsulta {
     public Consulta recuperaConsulta(Long codigo){
         return this.repositorioConsulta.recuperar(codigo);
     }
+    public List<Consulta> recuperarConsultasDoDia(){
+        return repositorioConsulta.recuperarConsultasData();
+    }
     
     public void deletarConsulta(Consulta co){
         this.repositorioConsulta.excluir(co);

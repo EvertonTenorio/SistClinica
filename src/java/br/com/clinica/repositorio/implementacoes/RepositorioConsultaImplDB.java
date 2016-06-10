@@ -92,4 +92,25 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
     public List<Consulta> recuperarConsultasPaciente(Paciente p){
         return (List<Consulta>) DaoManagerHiber.getInstance().recover("from Consulta where Paciente_id = " + p.getId());
     }
+     public List<Consulta> recuperarConsultasData(){
+         List<Consulta> consultas = DaoManagerHiber.getInstance().recover("from Consulta" );
+     
+        if(consultas==null)
+           return null;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dayKey = sdf.format(new Date());
+        
+        for(Iterator<Consulta> c = consultas.iterator();c.hasNext();){
+            Consulta caux = c.next();
+            String d = sdf.format(caux.getData());
+            if(!d.equals(dayKey)){
+                c.remove();
+            }
+        }        
+            
+        return consultas;
+    }
+    
+    
 }

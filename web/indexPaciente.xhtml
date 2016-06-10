@@ -15,6 +15,9 @@
         <ui:include src="menuPaciente.xhtml" />
 
         <h:form>
+            <p:fieldset legend="Consultas Marcadas">
+                
+        
             <p:dataTable id="tabelaConsulta" value="#{controleConsulta.recuperarConsultaPac(controleLogin.pacLogado)}" var="item"
                          rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
                          selection="#{controleConsulta.selectedCons}">
@@ -66,6 +69,8 @@
                                oncomplete="PF('painel1').hide()"/>
 
             </p:dialog>
+            </p:fieldset>
+            
         </h:form>
     </h:body>
 </html>
