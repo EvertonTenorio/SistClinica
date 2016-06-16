@@ -128,6 +128,7 @@ public class ConstrutorConsulta implements Serializable{
         this.ListaHorarios.add("17:00");
     
         int horaAtual = Integer.parseInt(sdf.format(new Date()).split(":")[0]);
+        int minutoAtual = Integer.parseInt(sdf.format(new Date()).split(":")[1]);
         String dataAtual = sdf2.format(new Date());
         
         String horaConsulta;
@@ -136,7 +137,7 @@ public class ConstrutorConsulta implements Serializable{
         for(int j = 0; j < ListaHorarios.size(); j++){
             int horaDisponivel = Integer.parseInt(ListaHorarios.get(j).split(":")[0]);
           
-            if(horaDisponivel < horaAtual && dataAtual.equals(sdf2.format(data))){
+            if((horaDisponivel < horaAtual || (horaDisponivel == horaAtual && minutoAtual > 0))&& dataAtual.equals(sdf2.format(data))){
                 ListaHorarios.remove(j);
                 removeuHora = true;
                 j--;

@@ -9,12 +9,9 @@ import br.com.clinica.negocio.Funcionario;
 import br.com.clinica.negocio.Paciente;
 import br.com.clinica.negocio.Usuario;
 import br.com.clinica.repositorio.implementacoes.RepositorioLoginImplDB;
-import br.com.clinica.web.beangerenciado.ConstrutorUsuario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -63,7 +60,7 @@ public class ControladorLogin {
             return "/index.xhtml";
         } else if((funcLogado != null) && (pacLogado == null)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Funcionário "+funcLogado.getNome() +" logado com sucesso!"));
-            return "/indexMenu.xhtml";
+            return "/indexFuncionario.xhtml";
         }else if((pacLogado != null) && (funcLogado == null)){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Parabéns!", "Paciente "+ pacLogado.getNome()+" logado com sucesso!"));
             return "/indexPaciente.xhtml";
@@ -98,10 +95,11 @@ public class ControladorLogin {
         }
     }
     
-    public void sair(){
+    public String sair(){
         this.funcLogado = null;
         this.pacLogado = null;
         ((HttpSession)(FacesContext.getCurrentInstance().getExternalContext().getSession(true))).removeAttribute("usuario");
+        return "/index.xhtml";
     }
     
     public Funcionario getFuncLogado() {

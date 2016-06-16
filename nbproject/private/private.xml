@@ -12,15 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/index.xhtml</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/controladores/ControladorConsulta.java</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/menuPaciente.xhtml</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/CadastroConsultaPaciente.xhtml</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/indexPaciente.xhtml</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/controladores/ControladorLogin.java</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/CadastroConsulta.xhtml</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/web/beangerenciado/ConstrutorConsulta.java</file>
-            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/repositorio/implementacoes/RepositorioConsultaImplDB.java</file>
+            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/negocio/WebServiceCep.java</file>
+            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/negocio/Endereco.java</file>
+            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/web/CadastroPaciente.xhtml</file>
+            <file>file:/C:/Users/Everton/Documents/NetBeansProjects/SistClinica/src/java/br/com/clinica/web/beangerenciado/ConstrutorPaciente.java</file>
         </group>
     </open-files>
 </project-private>

@@ -90,6 +90,9 @@ public class RepositorioConsultaImplDB implements RepositorioGenerico<Consulta> 
     }
     
     public List<Consulta> recuperarConsultasPaciente(Paciente p){
+        if(p == null)
+            return null;
+            
         return (List<Consulta>) DaoManagerHiber.getInstance().recover("from Consulta where Paciente_id = " + p.getId());
     }
      public List<Consulta> recuperarConsultasData(){

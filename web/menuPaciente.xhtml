@@ -9,29 +9,28 @@
     </h:head>
     <h:body>
         <h:form id="formMenu" >
-            
             <c:if test="${controleLogin.pacLogado==null}">
                 <script>
-                    location.href="index.xhtml";
+                    location.href = "index.xhtml";
                 </script>
-            </c:if>
-            
+            </c:if>  
+
             <p:growl id="gro" showDetail="true" life="3000" sticky="false"/>
-            
+
             <p:menubar>
                 <p:menuitem value="Home" url="indexPaciente.xhtml"/>
                 <p:submenu label="Paciente">
                     <p:menuitem value="Apresentar" url="ApresentaPacienteLogado.xhtml"/>
                 </p:submenu>
-                
+
                 <p:submenu label="Consulta">
                     <p:menuitem value="Cadastro" url="CadastroConsultaPaciente.xhtml"/>
                 </p:submenu> 
-                
+
                 <p:submenu label="#{controleLogin.pacLogado.nome}" style="position: absolute; right: 0px">
-                    <p:menuitem action="#{controleLogin.sair()}" value="Sair" url="index.xhtml"/>
+                    <p:menuitem action="#{controleLogin.sair()}" value="Sair"/>
                 </p:submenu>                 
-              
+
             </p:menubar>
             <p:separator/>
         </h:form>

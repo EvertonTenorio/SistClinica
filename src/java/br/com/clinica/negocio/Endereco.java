@@ -17,7 +17,6 @@ import javax.persistence.Id;
  * @author Jackson 
  */
 @Embeddable
-
 public class Endereco implements Serializable {
     
     @Column(length = 80, nullable = false)
@@ -45,8 +44,6 @@ public class Endereco implements Serializable {
     @Deprecated
     public Endereco() {
     }
-
-   
 
     public String getLogradouro() {
         return logradouro;
