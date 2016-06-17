@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lista de Consultas</title>
     </h:head>
@@ -14,7 +15,7 @@
         <ui:include src="menu.xhtml" />
 
 
-        <h:form>
+        <h:form id="formulario">
             <p:dataTable id="tabelaConsulta" value="#{controleConsulta.consultas}" var="item"
                          rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
                          selection="#{controleConsulta.selectedCons}">
@@ -26,18 +27,27 @@
                 <p:column sortBy="#{item.paciente.nome}" filterBy="#{item.paciente.nome}" headerText="Paciente/CPF" footerText="Paciente/CPF" >
                     <h:outputText value="#{item.paciente.nome}/#{item.paciente.cpf}"/>
                 </p:column>
-                
+
                 <p:column sortBy="#{item.medico.nome}" filterBy="#{item.medico.nome}" headerText="Medico" footerText="Medico" >
                     <h:outputText value="#{item.medico.nome}/#{item.medico.nomeEspecialidade.nome}"/>
                 </p:column>
-                
+                <p:column headerText="Operações">
+
+
+
+                    <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
+                                     update=":formulario:dial1">
+                        <f:setPropertyActionListener target="#{controleConsulta.selectedCons}" value="#{item}"/>
+                    </p:commandButton>
+
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleConsulta.deletarConsulta(item)}" 
+                                     update="tabelaConsulta">
+                        <p:confirm header="ATENÇÃO" message="Realmente deseja desmarcar esta Consulta?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                </p:column>
+
             </p:dataTable>
-            <p:commandButton value="Visualizar dados da Consulta" 
-                             update="dial1" oncomplete="PF('painel1').show()"/>
-            <p:commandButton value="Desmarcar" actionListener="#{controleConsulta.deletarConsulta(controleConsulta.selectedCons)}" 
-                             update="tabelaConsulta">
-                <p:confirm header="ATENÇÃO" message="Realmente deseja desmarcar esta Consulta?" icon="ui-icon-alert" />
-            </p:commandButton>
+            
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
@@ -53,13 +63,13 @@
 
                     <h:outputText value="Data e Hora"/>
                     <h:outputText value="#{controleConsulta.selectedCons.dataString}"/>
-                    
+
                     <h:outputText value="Paciente/CPF"/>
                     <h:outputText value="#{controleConsulta.selectedCons.paciente.nome}/#{controleConsulta.selectedCons.paciente.cpf}"/>
-                    
+
                     <h:outputText value="Médico/Especialidade"/>
                     <h:outputText value="#{controleConsulta.selectedCons.medico.nome}/#{controleConsulta.selectedCons.medico.nomeEspecialidade.nome}"/>
-                
+
                 </p:panelGrid>
 
                 <p:commandLink value="fechar" 

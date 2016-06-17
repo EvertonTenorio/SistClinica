@@ -11,6 +11,7 @@
         <ui:include src="menuPaciente.xhtml"/>
 
         <h:form id="formPac">
+            <p:fieldset legend="Dados do paciente"> 
             <p:panelGrid columns="2">
                 <h:outputText value="Nome"/>
                 <h:outputText value="#{controleLogin.pacLogado.nome}"/>
@@ -50,10 +51,11 @@
 
                 <h:outputText value="Login"/>
                 <h:outputText value="#{controleLogin.pacLogado.usuario.email}"/>
-
-            </p:panelGrid>
-
-
+                 </p:panelGrid>
+                <p:commandButton value="Alterar" action="#{controlePaciente.setSelectedPac(controleLogin.pacLogado)}" 
+                                    oncomplete="location.href='AlteraPacienteLogado.xhtml'"/>
+           
+         </p:fieldset>
         </h:form>
     </h:body>
 </html>

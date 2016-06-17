@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lista de Especialidades</title>
     </h:head>
@@ -14,10 +15,9 @@
         <ui:include src="menu.xhtml" />
 
 
-        <h:form>
+        <h:form id="formulario">
             <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
-                         selection="#{controleEspecialidade.selectedEspec}">
+                         rowKey="#{item.id}" paginator="true" rows="10">
                 
                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
                     <h:outputText value="#{item.id}"/>
@@ -26,16 +26,24 @@
                 <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
                     <h:outputText value="#{item.nome}"/>
                 </p:column>
+                 <p:column headerText="Operações">
 
+
+
+                    <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
+                                     update=":formulario:dial1">
+                        <f:setPropertyActionListener target="#{controleEspecialidade.selectedEspec}" value="#{item}"/>
+                    </p:commandButton>
+
+                     <p:commandButton icon="ui-icon-trash" actionListener="#{controleEspecialidade.deletarEspecialidade(item)}" 
+                                     update="tabelaEspecialidade">
+                        <p:confirm header="ATENÇÃO" message="Realmente deseja excluir essa especialidade ?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraEspecialidade.xhtml'"
+                                      action="#{controleEspecialidade.setSelectedEspec(item)}"/>
+                </p:column>
             </p:dataTable>
-            <p:commandButton value="Visualizar dados da Especialidade" 
-                             update="dial1" oncomplete="PF('painel1').show()"/>
-            <p:commandButton value="Alterar" 
-                             oncomplete="location.href='AlteraEspecialidade.xhtml'"/>
-            <p:commandButton value="Excluir" actionListener="#{controleEspecialidade.deletarEspecialidade(controleEspecialidade.selectedEspec)}" 
-                             update="tabelaEspecialidade">
-                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esta Especialidade?" icon="ui-icon-alert" />
-            </p:commandButton>
+           
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

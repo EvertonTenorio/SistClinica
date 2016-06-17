@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Lista de Paciente</title>    
     </h:head>
@@ -18,10 +19,9 @@ and open the template in the editor.
         
         <ui:include src="menu.xhtml"/>
         
-        <h:form>
+        <h:form id="formulario">
             <p:dataTable id="tabelaPaciente" value="#{controlePaciente.pacientes}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
-                         selection="#{controlePaciente.selectedPac}">
+                         rowKey="#{item.id}" paginator="true" rows="10" >
                 
                 <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
                     <h:outputText value="#{item.nome}"/>
@@ -34,16 +34,25 @@ and open the template in the editor.
                 <p:column headerText="Telefone Fixo" footerText="Telefone Fixo">
                     <h:outputText value="#{item.telefoneFixo}"/>
                 </p:column>
+                 <p:column headerText="Operações">
+
+
+
+                    <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
+                                     update=":formulario:dial1">
+                        <f:setPropertyActionListener target="#{controlePaciente.selectedPac}" value="#{item}"/>
+                    </p:commandButton>
+
+                     <p:commandButton icon="ui-icon-trash" actionListener="#{controlePaciente.deletarPaciente(item)}" 
+                                     update="tabelaPaciente">
+                        <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esse paciente?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraPaciente.xhtml'"
+                                      action="#{controlePaciente.setSelectedPac(item)}"/>
+                </p:column>
             </p:dataTable>
             
-            <p:commandButton value="Visualizar dados do Paciente" 
-                             update="dial1" oncomplete="PF('painel1').show()"/>
-            <p:commandButton value="alterar" 
-                             oncomplete="location.href='AlteraPaciente.xhtml'"/>
-            <p:commandButton value="Excluir" actionListener="#{controlePaciente.deletarPaciente(controlePaciente.selectedPac)}" 
-                             update="tabelaPaciente">
-                <p:confirm header="ATENÇÃO" message="Realmente deseja excluir este Paciente?" icon="ui-icon-alert" />
-            </p:commandButton>
+           
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
