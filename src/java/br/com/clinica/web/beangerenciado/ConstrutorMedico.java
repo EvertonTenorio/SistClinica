@@ -21,7 +21,7 @@ public class ConstrutorMedico {
 
     private String Nome;
     private Long Cpf;
-    private String Rg;
+    private Long Rg;
     private Endereco endereco;
     private String TelefoneFixo;
     private String Celular;
@@ -51,11 +51,11 @@ public class ConstrutorMedico {
 
   
 
-    public String getRg() {
+    public Long getRg() {
         return Rg;
     }
 
-    public void setRg(String Rg) {
+    public void setRg(Long Rg) {
         this.Rg = Rg;
     }
 
