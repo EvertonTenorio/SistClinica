@@ -11,6 +11,9 @@
     <h:body>      
         <h:form id="form1">
             <p:growl id="gro" showDetail="true" life="5000" sticky="false"/>
+            
+            <p:graphicImage url="/img/Logo.jpg" height="150"/>
+            
             <p:panel>
                 <p:commandButton value="REALIZAR LOGIN "  oncomplete="PF('dlg1').show()" style="left: 41%" />
                 <p:dialog header="Login" widgetVar="dlg1"  closable="false" resizable="false" modal="true"
@@ -25,6 +28,8 @@
                         <f:facet name="footer">
                             <p:commandButton value="Entrar" action="#{controleLogin.realizarLogin(cusuario.construirUsuario())}"
                                              update="form1"/>
+                            <p:commandButton value="Cancelar" 
+                                             onclick="PF('painel1').hide()"/>
                         </f:facet>  
                     </h:panelGrid>
                 </p:dialog>            
