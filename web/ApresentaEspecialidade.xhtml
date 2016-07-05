@@ -16,34 +16,32 @@
 
 
         <h:form id="formulario">
-            <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10">
-                
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="Identificador" footerText="Identificador">
+            <p:dataTable id="tabelaEspecialidade" value="#{controleEspecialidade.especialidades}" var="especialidade"
+                         rowKey="#{especialidade.id}" paginator="true" rows="10">
+
+                <p:column sortBy="#{especialidade.id}" filterBy="#{especialidade.id}" headerText="Identificador" footerText="Identificador">
                     <h:outputText value="#{item.id}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
-                    <h:outputText value="#{item.nome}"/>
+                <p:column sortBy="#{especialidade.nome}" filterBy="#{especialidade.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{especialidade.nome}"/>
                 </p:column>
-                 <p:column headerText="Operações">
-
-
+                <p:column headerText="Operações">
 
                     <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
                                      update=":formulario:dial1">
-                        <f:setPropertyActionListener target="#{controleEspecialidade.selectedEspec}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{controleEspecialidade.selectedEspec}" value="#{especialidade}"/>
                     </p:commandButton>
 
-                     <p:commandButton icon="ui-icon-trash" actionListener="#{controleEspecialidade.deletarEspecialidade(item)}" 
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleEspecialidade.deletarEspecialidade(especialidade)}" 
                                      update="tabelaEspecialidade">
                         <p:confirm header="ATENÇÃO" message="Realmente deseja excluir essa especialidade ?" icon="ui-icon-alert" />
                     </p:commandButton>
-                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraEspecialidade.xhtml'"
-                                      action="#{controleEspecialidade.setSelectedEspec(item)}"/>
+                    <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraEspecialidade.xhtml'"
+                                     action="#{controleEspecialidade.setSelectedEspec(especialidade)}"/>
                 </p:column>
             </p:dataTable>
-           
+
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

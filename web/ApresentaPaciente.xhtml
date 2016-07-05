@@ -16,43 +16,41 @@ and open the template in the editor.
     <body>
         <p:growl id="gro" showDetail="true" sticky="false" life="3000"
                  autoUpdate="true"/>
-        
+
         <ui:include src="menu.xhtml"/>
-        
+
         <h:form id="formulario">
-            <p:dataTable id="tabelaPaciente" value="#{controlePaciente.pacientes}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" >
-                
-                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
-                    <h:outputText value="#{item.nome}"/>
+            <p:dataTable id="tabelaPaciente" value="#{controlePaciente.pacientes}" var="paciente"
+                         rowKey="#{paciente.id}" paginator="true" rows="10" >
+
+                <p:column sortBy="#{paciente.nome}" filterBy="#{paciente.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{paciente.nome}"/>
                 </p:column>
-                
+
                 <p:column headerText="CPF" footerText="CPF">
-                    <h:outputText value="#{item.cpfString}"/>
+                    <h:outputText value="#{paciente.cpf}"/>
                 </p:column>
-                
+
                 <p:column headerText="Telefone Fixo" footerText="Telefone Fixo">
-                    <h:outputText value="#{item.telefoneFixo}"/>
+                    <h:outputText value="#{paciente.telefoneFixo}"/>
                 </p:column>
-                 <p:column headerText="Operações">
-
-
+                <p:column headerText="Operações">
 
                     <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
                                      update=":formulario:dial1">
-                        <f:setPropertyActionListener target="#{controlePaciente.selectedPac}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{controlePaciente.selectedPac}" value="#{paciente}"/>
                     </p:commandButton>
 
-                     <p:commandButton icon="ui-icon-trash" actionListener="#{controlePaciente.deletarPaciente(item)}" 
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controlePaciente.deletarPaciente(paciente)}" 
                                      update="tabelaPaciente">
                         <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esse paciente?" icon="ui-icon-alert" />
                     </p:commandButton>
-                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraPaciente.xhtml'"
-                                      action="#{controlePaciente.setSelectedPac(item)}"/>
+                    <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraPaciente.xhtml'"
+                                     action="#{controlePaciente.setSelectedPac(paciente)}"/>
                 </p:column>
             </p:dataTable>
-            
-           
+
+
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
@@ -61,7 +59,7 @@ and open the template in the editor.
             <p:dialog id="dial1" closable="false" resizable="false" modal="true"
                       visible="false" widgetVar="painel1" header="Dados do Paciente">
                 <p:panelGrid columns="2">
-                    
+
                     <h:outputText value="Identificador"/>
                     <h:outputText value="#{controlePaciente.selectedPac.id}"/>
 
@@ -69,7 +67,7 @@ and open the template in the editor.
                     <h:outputText value="#{controlePaciente.selectedPac.nome}"/>
 
                     <h:outputText value="CPF"/>
-                    <h:outputText value="#{controlePaciente.selectedPac.cpfString}"/>
+                    <h:outputText value="#{controlePaciente.selectedPac.cpf}"/>
 
                     <h:outputText value="RG"/>
                     <h:outputText value="#{controlePaciente.selectedPac.rg}"/>
@@ -97,10 +95,10 @@ and open the template in the editor.
 
                     <h:outputText value="Celular"/>
                     <h:outputText value="#{controlePaciente.selectedPac.celular}"/>
-                    
+
                     <h:outputText value="Email"/>
                     <h:outputText value="#{controlePaciente.selectedPac.usuario.email}"/>
-                    
+
                     <h:outputText value="Gênero"/>
                     <h:outputText value="#{controlePaciente.selectedPac.genero}"/>
 
@@ -110,6 +108,6 @@ and open the template in the editor.
                                oncomplete="PF('painel1').hide()"/>
             </p:dialog>
         </h:form>
-        
+
     </body>
 </html>

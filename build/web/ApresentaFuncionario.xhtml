@@ -16,38 +16,36 @@
 
 
         <h:form id="formulario">
-            <p:dataTable id="tabelaFuncionario" value="#{controleFuncionario.funcionarios}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" >
+            <p:dataTable id="tabelaFuncionario" value="#{controleFuncionario.funcionarios}" var="funcionario"
+                         rowKey="#{funcionario.id}" paginator="true" rows="10" >
 
-                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
-                    <h:outputText value="#{item.nome}"/>
+                <p:column sortBy="#{funcionario.nome}" filterBy="#{funcionario.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{funcionario.nome}"/>
                 </p:column>
 
                 <p:column headerText="CPF" footerText="CPF">
-                    <h:outputText value="#{item.cpf}"/>
+                    <h:outputText value="#{funcionario.cpf}"/>
                 </p:column>
 
                 <p:column headerText="Celular" footerText="Celular">
-                    <h:outputText value="#{item.celular}"/>
+                    <h:outputText value="#{funcionario.celular}"/>
                 </p:column>
-                 <p:column headerText="Operações">
-
-
+                <p:column headerText="Operações">
 
                     <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
                                      update=":formulario:dial1">
-                        <f:setPropertyActionListener target="#{controleFuncionario.selectedFunc}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{controleFuncionario.selectedFunc}" value="#{funcionario}"/>
                     </p:commandButton>
 
-                     <p:commandButton icon="ui-icon-trash" actionListener="#{controleFuncionario.deletarFuncionario(item)}" 
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleFuncionario.deletarFuncionario(funcionario)}" 
                                      update="tabelaFuncionario">
                         <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esse funcionário ?" icon="ui-icon-alert" />
                     </p:commandButton>
-                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraFuncionario.xhtml'"
-                                      action="#{controleFuncionario.setSelectedFunc(item)}"/>
+                    <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraFuncionario.xhtml'"
+                                     action="#{controleFuncionario.setSelectedFunc(funcionario)}"/>
                 </p:column>
             </p:dataTable>
-           
+
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
@@ -57,7 +55,7 @@
                       visible="false" widgetVar="painel1" header="Dados do Funcionário">
 
                 <p:panelGrid columns="2">
-                    
+
                     <h:outputText value="Identificador"/>
                     <h:outputText value="#{controleFuncionario.selectedFunc.id}"/>
 
@@ -93,15 +91,15 @@
 
                     <h:outputText value="Celular"/>
                     <h:outputText value="#{controleFuncionario.selectedFunc.celular}"/>
-                    
+
                     <h:outputText value="Login"/>
                     <h:outputText value="#{controleFuncionario.selectedFunc.usuario.email}"/>
 
-                  
+
                     <h:outputText value="Gênero"/>
                     <h:outputText value="#{controleFuncionario.selectedFunc.genero}"/>
 
-                  
+
                 </p:panelGrid>
 
                 <p:commandLink value="fechar" 

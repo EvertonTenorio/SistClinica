@@ -104,20 +104,6 @@ public class Paciente implements Serializable {
     public Usuario getUsuario() {
         return usuario;
     }
-    
-    public String getCpfString(){
-        String cpfRetorno = this.Cpf.toString();
-        
-        for(int i = 0; i < cpfRetorno.length(); i++){
-            if(i == 2 || i == 5){
-                cpfRetorno += ".";
-            }
-            if(i == 8){
-                cpfRetorno += "-";
-            }
-        }
-        return cpfRetorno;
-    }
 
     public Long getCpf() {
         return Cpf;

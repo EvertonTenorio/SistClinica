@@ -16,20 +16,19 @@
 
 
         <h:form id="formulario">
-            <p:dataTable id="tabelaConsulta" value="#{controleConsulta.consultas}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" selectionMode="single"
-                         selection="#{controleConsulta.selectedCons}">
+            <p:dataTable id="tabelaConsulta" value="#{controleConsulta.consultas}" var="consulta"
+                         rowKey="#{consulta.id}" paginator="true" rows="10" >
 
-                <p:column sortBy="#{item.dataString}" filterBy="#{item.dataString}" headerText="Data e Hora" footerText="Data e Hora">
-                    <h:outputText value="#{item.dataString}"/>
+                <p:column sortBy="#{consulta.dataString}" filterBy="#{consulta.dataString}" headerText="Data e Hora" footerText="Data e Hora">
+                    <h:outputText value="#{consulta.dataString}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.paciente.nome}" filterBy="#{item.paciente.nome}" headerText="Paciente/CPF" footerText="Paciente/CPF" >
-                    <h:outputText value="#{item.paciente.nome}/#{item.paciente.cpf}"/>
+                <p:column sortBy="#{consulta.paciente.nome}" filterBy="#{consulta.paciente.nome}" headerText="Paciente/CPF" footerText="Paciente/CPF" >
+                    <h:outputText value="#{consulta.paciente.nome}/#{consulta.paciente.cpf}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.medico.nome}" filterBy="#{item.medico.nome}" headerText="Medico" footerText="Medico" >
-                    <h:outputText value="#{item.medico.nome}/#{item.medico.nomeEspecialidade.nome}"/>
+                <p:column sortBy="#{consulta.medico.nome}" filterBy="#{consulta.medico.nome}" headerText="Medico" footerText="Medico" >
+                    <h:outputText value="#{consulta.medico.nome}/#{consulta.medico.nomeEspecialidade.nome}"/>
                 </p:column>
                 <p:column headerText="Operações">
 
@@ -37,10 +36,10 @@
 
                     <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
                                      update=":formulario:dial1">
-                        <f:setPropertyActionListener target="#{controleConsulta.selectedCons}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{controleConsulta.selectedCons}" value="#{consulta}"/>
                     </p:commandButton>
 
-                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleConsulta.deletarConsulta(item)}" 
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleConsulta.deletarConsulta(consulta)}" 
                                      update="tabelaConsulta">
                         <p:confirm header="ATENÇÃO" message="Realmente deseja desmarcar esta Consulta?" icon="ui-icon-alert" />
                     </p:commandButton>

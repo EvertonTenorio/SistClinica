@@ -16,49 +16,47 @@
 
 
         <h:form id="formulario">
-            <p:dataTable id="tabelaMedico" value="#{controleMedico.medicos}" var="item"
-                         rowKey="#{item.id}" paginator="true" rows="10" >
+            <p:dataTable id="tabelaMedico" value="#{controleMedico.medicos}" var="medico"
+                         rowKey="#{medico.id}" paginator="true" rows="10" >
 
-                <p:column sortBy="#{item.nome}" filterBy="#{item.nome}" headerText="Nome" footerText="Nome">
-                    <h:outputText value="#{item.nome}"/>
+                <p:column sortBy="#{medico.nome}" filterBy="#{medico.nome}" headerText="Nome" footerText="Nome">
+                    <h:outputText value="#{medico.nome}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.nomeEspecialidade.nome}" filterBy="#{item.nomeEspecialidade.nome}"
+                <p:column sortBy="#{medico.nomeEspecialidade.nome}" filterBy="#{medico.nomeEspecialidade.nome}"
                           headerText="Especialidade" footerText="Especialidade">
-                    <h:outputText value="#{item.nomeEspecialidade.nome}"/>
+                    <h:outputText value="#{medico.nomeEspecialidade.nome}"/>
                 </p:column>
 
                 <p:column headerText="CPF" footerText="CPF">
-                    <h:outputText value="#{item.cpf}"/>
+                    <h:outputText value="#{medico.cpf}"/>
                 </p:column>
 
-
-
                 <p:column headerText="Celular" footerText="Celular">
-                    <h:outputText value="#{item.celular}"/>
+                    <h:outputText value="#{medico.celular}"/>
                 </p:column>
 
                 <p:column headerText="CRM">
-                    <h:outputText value="#{item.CRM}"/>
+                    <h:outputText value="#{medico.CRM}"/>
                 </p:column>
-                 <p:column headerText="Operações">
+                <p:column headerText="Operações">
 
 
 
                     <p:commandButton icon="ui-icon-search" oncomplete="PF('painel1').show()"
                                      update=":formulario:dial1">
-                        <f:setPropertyActionListener target="#{controleMedico.selectedMed}" value="#{item}"/>
+                        <f:setPropertyActionListener target="#{controleMedico.selectedMed}" value="#{medico}"/>
                     </p:commandButton>
 
-                     <p:commandButton icon="ui-icon-trash" actionListener="#{controleMedico.deletarMedico(item)}" 
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{controleMedico.deletarMedico(medico)}" 
                                      update="tabelaMedico">
                         <p:confirm header="ATENÇÃO" message="Realmente deseja excluir esse médico?" icon="ui-icon-alert" />
                     </p:commandButton>
-                     <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraMedico.xhtml'"
-                                      action="#{controleMedico.setSelectedMed(item)}"/>
+                    <p:commandButton icon="ui-icon-pencil"  oncomplete="location.href='AlteraMedico.xhtml'"
+                                     action="#{controleMedico.setSelectedMed(medico)}"/>
                 </p:column>
             </p:dataTable>
-           
+
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
