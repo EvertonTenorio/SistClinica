@@ -39,10 +39,10 @@ public class ControladorConsulta {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage("parabéns", "A Consulta foi cadastrada com sucesso!"));
         
-        if(controleLogin.getPacLogado() == null){
-            return "ApresentaConsulta.xhtml";
+        if(controleLogin.getFuncLogado() != null){
+            return "/ApresentaConsulta.xhtml";
         }else{
-            return "indexPaciente.xhtml";
+            return "/indexPaciente.xhtml";
         }   
     }
     

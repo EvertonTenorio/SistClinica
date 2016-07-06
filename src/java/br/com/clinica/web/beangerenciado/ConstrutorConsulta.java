@@ -100,7 +100,9 @@ public class ConstrutorConsulta implements Serializable{
     
     public void horasDisponiveisConsultas(Date data){
         List<Consulta> consultasPaciente;
+        
         List<Consulta> consultas = new RepositorioConsultaImplDB().recuperarConsultasMedicoPorData(this.Medico, data);
+        
         if(controladorLogin.getPacLogado() == null){
             consultasPaciente = new RepositorioConsultaImplDB().recuperarConsultasPacientePorData(this.Paciente, data);
         }else{
@@ -122,6 +124,8 @@ public class ConstrutorConsulta implements Serializable{
         this.ListaHorarios.add("09:00");
         this.ListaHorarios.add("10:00");
         this.ListaHorarios.add("11:00");
+        this.ListaHorarios.add("12:00");
+        this.ListaHorarios.add("13:00");
         this.ListaHorarios.add("14:00");
         this.ListaHorarios.add("15:00");
         this.ListaHorarios.add("16:00");
