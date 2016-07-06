@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +31,11 @@ public class ControladorConsulta {
     public ControladorConsulta(){
         this.repositorioConsulta= new RepositorioConsultaImplDB();
         this.ListaHorarios = new ArrayList<>();
-        this.controleLogin = new ControladorLogin();
+        this.controleLogin = (ControladorLogin)((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true)).getAttribute("controleLogin");
+        if(this.controleLogin==null){
+            controleLogin = new ControladorLogin();
+            ((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("controleLogin",this.controleLogin);
+        }
     }
     
      public String inserirConsulta(Consulta co){
